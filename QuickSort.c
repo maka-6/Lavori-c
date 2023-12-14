@@ -10,7 +10,6 @@
 */
 
 #include <stdio.h>
-#include <stdlib.h>
 
 
 void swap( int *a, int *b ){
@@ -39,6 +38,7 @@ int partition( int arr[], int low, int high ){
     }
     
     swap( &arr[i + 1], &arr[high] );
+
     return (i + 1);
 }
 
@@ -57,10 +57,10 @@ void quickSort( int arr[], int i, int j ){
 
 int main(){
 	
-	int arr[] = { 4, 5, 6, 7, 5, 3 };
+	int arr[] = { 40, 57, 6, 7, 5, 3, 9, 10, 91, 6 };
 	int n;
 	char s;
-	int size = 6;
+	int size = 9;
 	
 	printf("\n\nArray non ordinato: ");
 	printf("\narr[");
