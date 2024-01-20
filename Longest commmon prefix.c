@@ -1,5 +1,5 @@
 /*
-	Nome: Longest commmon prefix
+	Nome: Longest common prefix
 	Copyright: xx
 	Autore: Youness Makaoui
 	Luogo:

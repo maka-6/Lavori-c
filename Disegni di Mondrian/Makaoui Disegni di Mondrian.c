@@ -82,7 +82,6 @@ int main(){
             Load( A, B, pfile, N );
 
 
-
         } else {
 
             printf("\ndati non validi");
