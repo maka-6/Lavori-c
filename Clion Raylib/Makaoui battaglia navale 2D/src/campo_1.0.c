@@ -4,8 +4,7 @@
 	Data: 9/9/2023
 */
 
-#define r 23
-#define c 23
+#include "struct.h"
 
 char mat[r][c];
 

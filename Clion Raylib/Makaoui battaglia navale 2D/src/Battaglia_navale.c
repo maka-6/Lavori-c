@@ -1,87 +1,26 @@
 /*
 	Autore: MAKAOUI YOUNESS
-	Copyright: nessuno
+	Copyright:
 	Data: xx
-	Versione: 1.1 Beta
+	Versione: 1.2 Beta
 	Classe: 3E
 	Luogo: xx
 	Novita' versione:
 		- 1.1:
 			-ottimizzazione
-			Ancora in revisione
+        - 1.2:
+            -aggiunta libreria grafica Raylib
+            Ancora in revisione
 	Descrizione:
-			-il programma simula battaglia navale contro il computer
+			-il programma
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <ctype.h>
-#include <string.h>
-#include <time.h>
-#include <conio.h>
-#include <tchar.h>
-#include "campo.c"
-//#include "SDL2/SDL.h"
-
-#define ANSI_COLOR_RED     "\x1b[31m"
-#define ANSI_COLOR_RESET   "\x1b[0m"
-
-#define r 23
-#define c 23
-
-/*
-SDL_Init(SDL_INIT_VIDEO);
-int WINAPI WinMain(
-        _In_ HINSTANCE hInstance,
-        _In_opt_ HINSTANCE hPrevInstance,
-        _In_ LPSTR     lpCmdLine,
-        _In_ int       nCmdShow
-);
-*/
+#include "struct.h"
+#include "campo_1.0.c"
+#include "salvattaggi_1.0.c"
 
 // partite giocate
 int score = 0;
-
-// struct nave
-typedef struct{
-	
-	int dim;// dimensione della nave
-	
-	// coordinate della nave
-	int x;
-	int y;
-	
-	int verso;// verso della nave
-	
-}oggetto;
-
-
-// struct matrice
-typedef struct tab{
-	
-	char campo[r][c];
-	
-	char cont[r][c]; // matrice indici navi
-	
-	int nv; // numero navi rimaste 
-	
-	struct tab *pnext;
-	
-}tab;
-
-
-// stampa resoconto partita nel file
-typedef struct part{
-	
-	char vincitore[r]; // nome del vincitore
-	
-	int nvG; // numero navi giocatore rimaste
-	
-	int nvC; // numero navi cpu rimaste
-	
-	struct part *pnext;
-	
-}part;
 
 
 // genera il campo
@@ -387,86 +326,6 @@ void computer( tab **ptesta ){
 }
 
 
-// salva i punteggi delle partite
-int salva( tab *ptesta ){
-	
-	FILE *pfile = fopen( "score.txt","w+" );
-    	
-    int i = 0;
-    
-    char str[r];
-    
-    int num = 0;
-	
-	if( pfile != NULL ){// controllo che il file esista
-    	
-    	
-		tab *ptemp = ptesta;
-		tab *ptemp2 = ptemp->pnext; 
-	
-		part *pTesta = NULL;
-    	part *pTemp = NULL;
-    	
-    	printf("\nInserisci il tuo nome campione\n-> ");
-    	gets(str);
-        fflush(stdin);
-			
-		while( i != score ){
-		
-			pTemp = ( part* ) malloc(sizeof( part ) ); // Allocazione di un nuovo nodo
-			
-			strcpy( pTemp->vincitore, str );
-			
-			pTemp->nvC = ptemp2->nv; // assegno il numero di navi
-			pTemp->nvG = ptemp->nv; // assegno il numero di navi
-			
-			fprintf( pfile, "\nVincitore: %s", pTemp->vincitore );
-			fprintf( pfile, "\nNavi rimaste al computer: %d", pTemp->nvC );
-			fprintf( pfile, "\nNavi rimaste a %s: %d", str,pTemp->nvG );
-			
-			pTemp->pnext = pTesta;
-			
-			pTesta = pTemp;
-			
-			i++;
-		}
-		
-		fclose (pfile);
-		
-		num = 1;
-		
-	}
-	
-	free(ptesta);
-	
-	return num;
-}
-
-
-// stampa un messaggio
-void messaggio( int ver ){
-	
-	
-	if ( ver == 1 ){
-	
-    	char str[2];
-    	
-    	printf("\nEz boy, ma ora dimmi visto che hai avuto il coraggio di finire una partita");
-    	printf("\nDi che colore e' il sole?\n-> ");
-    	scanf("%s",str);
-    	
-    	if( str[0] != ' ' ){
-    		
-    		printf("\nSbagliato ESCI DI CASA, tutti sanno che viola come me?? ?????giusto??????");
-		}
-		
-	} else {
-		
-		printf("\nErrore nella creazione del file");
-	}
-}
-
-
 void stampa( tab *ptesta ){
 
     int i, j;
@@ -569,13 +428,7 @@ int gioco( tab *ptesta ){
 			score++;
 		}
 	}while( !fine );
-	
-	if ( fine == 1 ){
-		
-		int ver = salva( ptesta );
-		
-		messaggio( ver );
-	}
+
 	
 	printf("ADDIO PAZZOIDE");
 	
