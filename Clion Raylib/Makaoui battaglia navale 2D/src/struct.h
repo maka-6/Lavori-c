@@ -1,6 +1,10 @@
-//
-// Created by makao on 21/01/2024.
-//
+/*
+	Nome: libreria struct
+	Versione: 1.0
+	Data: 21/01/2024
+    Descrizione:
+        - libreria per la creazione di campi
+*/
 
 #ifndef BATTAGLIA_NAVALE_C_STRUCT_H
 #define BATTAGLIA_NAVALE_C_STRUCT_H
