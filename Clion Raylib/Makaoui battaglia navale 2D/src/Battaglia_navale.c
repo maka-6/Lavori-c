@@ -5,7 +5,7 @@
 	Versione: 1.2 Beta
 	Classe: 3E
 	Luogo: xx
-	Novita' versione:
+	Novità versione:
 		- 1.1:
 			-ottimizzazione
         - 1.2:
@@ -24,19 +24,19 @@ int score = 0;
 
 
 // genera il campo
-void campoDiGioco( tab **ptesta, int s ){
+void campoDiGioco(tab **pointHead, int s ){
 
 	int i, j, g;
 	
-	tab *ptemp = NULL;
+	tab *pointTemp = NULL;
 	
     printf("\nGenerazione del campo...");
     
     for( g = 0; g < s; g++ ){// genera nv campi richiesti
     	
-    	ptemp = (tab*) malloc(sizeof(tab)); // Allocazione di un nuovo nodo per ptemp
+    	pointTemp = (tab*) malloc(sizeof(tab)); // Allocazione di un nuovo nodo per pointTemp
     	
-    	disegnaCampo( ptemp->campo );
+    	disegnaCampo(pointTemp->campo );
 		
 		// array che contiene le navi
 		oggetto item[14];
@@ -46,8 +46,8 @@ void campoDiGioco( tab **ptesta, int s ){
         // genero una matrice per gli indici
 		for ( i = 0; i < r; i++ ){
 			for ( j = 0; j < c; j++ ){
-			
-				ptemp->cont[i][j] = ptemp->campo[i][j];
+
+                pointTemp->cont[i][j] = pointTemp->campo[i][j];
 			}
 		}
 	
@@ -81,14 +81,14 @@ void campoDiGioco( tab **ptesta, int s ){
 
                 if ( item[nv].verso == 1 ) {
 
-                    if (  ptemp->campo[x][y] == ' ' && item[nv].dim + x  < c ){
+                    if (pointTemp->campo[x][y] == ' ' && item[nv].dim + x < c ){
 
                         x += 2;
                         v++;
 
                     }
 
-                } else if ( ptemp->campo[x][y] == ' ' && item[nv].dim + y < r ){
+                } else if (pointTemp->campo[x][y] == ' ' && item[nv].dim + y < r ){
 
                     y += 2;
                     v++;
@@ -104,42 +104,42 @@ void campoDiGioco( tab **ptesta, int s ){
 	        	if ( item[nv].verso == 1 ){// stampo le navi verticalmente
 		        	
 		        	if ( item[nv].dim == 4 ){
-		        		
-		        		ptemp->campo[x][y] = 194;
-		        		ptemp->cont[x][y] = indice;
+
+                        pointTemp->campo[x][y] = 194;
+                        pointTemp->cont[x][y] = indice;
 		        		x += 2;
-		        		ptemp->campo[x][y] = '|';
-		        		ptemp->cont[x][y] = indice;
+                        pointTemp->campo[x][y] = '|';
+                        pointTemp->cont[x][y] = indice;
 		        		x += 2;
-		        		ptemp->campo[x][y] = '|';
-		        		ptemp->cont[x][y] = indice;
+                        pointTemp->campo[x][y] = '|';
+                        pointTemp->cont[x][y] = indice;
 		        		x += 2;
-		        		ptemp->campo[x][y] = 25;
-		        		ptemp->cont[x][y] = indice;
+                        pointTemp->campo[x][y] = 25;
+                        pointTemp->cont[x][y] = indice;
 		        		
 					} else if ( item[nv].dim == 3 ){
-						
-						ptemp->campo[x][y] = 194;
-						ptemp->cont[x][y] = indice;
+
+                        pointTemp->campo[x][y] = 194;
+                        pointTemp->cont[x][y] = indice;
 		        		x += 2;
-		        		ptemp->campo[x][y] = '|';
-		        		ptemp->cont[x][y] = indice;
+                        pointTemp->campo[x][y] = '|';
+                        pointTemp->cont[x][y] = indice;
 		        		x += 2;
-		        		ptemp->campo[x][y] = 25;
-		        		ptemp->cont[x][y] = indice;
+                        pointTemp->campo[x][y] = 25;
+                        pointTemp->cont[x][y] = indice;
 		        		
 					} else if ( item[nv].dim == 2 ){
-						
-						ptemp->campo[x][y] = 194;
-						ptemp->cont[x][y] = indice;
+
+                        pointTemp->campo[x][y] = 194;
+                        pointTemp->cont[x][y] = indice;
 		        		x += 2;
-		        		ptemp->campo[x][y] = 25;
-		        		ptemp->cont[x][y] = indice;
+                        pointTemp->campo[x][y] = 25;
+                        pointTemp->cont[x][y] = indice;
 		        		
 					} else{
-						
-						ptemp->campo[x][y] = 25;
-						ptemp->cont[x][y] = indice;
+
+                        pointTemp->campo[x][y] = 25;
+                        pointTemp->cont[x][y] = indice;
 						
 					}
 					
@@ -149,43 +149,43 @@ void campoDiGioco( tab **ptesta, int s ){
 
                     if (item[nv].dim == 4) {
 
-                        ptemp->campo[x][y] = 195;
-                        ptemp->cont[x][y] = indice;
+                        pointTemp->campo[x][y] = 195;
+                        pointTemp->cont[x][y] = indice;
                         y += 2;
-                        ptemp->campo[x][y] = 196;
-                        ptemp->cont[x][y] = indice;
+                        pointTemp->campo[x][y] = 196;
+                        pointTemp->cont[x][y] = indice;
                         y += 2;
-                        ptemp->campo[x][y] = 196;
-                        ptemp->cont[x][y] = indice;
+                        pointTemp->campo[x][y] = 196;
+                        pointTemp->cont[x][y] = indice;
                         y += 2;
-                        ptemp->campo[x][y] = 26;
-                        ptemp->cont[x][y] = indice;
+                        pointTemp->campo[x][y] = 26;
+                        pointTemp->cont[x][y] = indice;
 
                     }
                     if (item[nv].dim == 3) {
 
-                        ptemp->campo[x][y] = 195;
-                        ptemp->cont[x][y] = indice;
+                        pointTemp->campo[x][y] = 195;
+                        pointTemp->cont[x][y] = indice;
                         y += 2;
-                        ptemp->campo[x][y] = 196;
-                        ptemp->cont[x][y] = indice;
+                        pointTemp->campo[x][y] = 196;
+                        pointTemp->cont[x][y] = indice;
                         y += 2;
-                        ptemp->campo[x][y] = 26;
-                        ptemp->cont[x][y] = indice;
+                        pointTemp->campo[x][y] = 26;
+                        pointTemp->cont[x][y] = indice;
 
                     }
                     if (item[nv].dim == 2) {
 
-                        ptemp->campo[x][y] = 195;
-                        ptemp->cont[x][y] = indice;
+                        pointTemp->campo[x][y] = 195;
+                        pointTemp->cont[x][y] = indice;
                         y += 2;
-                        ptemp->campo[x][y] = 26;
-                        ptemp->cont[x][y] = indice;
+                        pointTemp->campo[x][y] = 26;
+                        pointTemp->cont[x][y] = indice;
 
                     } else {
 
-                        ptemp->campo[x][y] = 26;
-                        ptemp->cont[x][y] = indice;
+                        pointTemp->campo[x][y] = 26;
+                        pointTemp->cont[x][y] = indice;
                     }
 
                     indice++;
@@ -193,19 +193,19 @@ void campoDiGioco( tab **ptesta, int s ){
                 nv++;
 	        }
 		}
+
+        pointTemp->nv = nv;
+
+        pointTemp->pnext = *pointHead;
 		
-		ptemp->nv = nv;
-		
-		ptemp->pnext = *ptesta;
-		
-		*ptesta = ptemp;
+		*pointHead = pointTemp;
 	}
     printf("\nGenerazione completata");
 }
 
 
 // elimina le navi indovinate
-void affondaNave( tab *ptemp, int x, int y ){
+void affondaNave(tab *pointTemp, int x, int y ){
 	
 	int i, j;
 	
@@ -213,25 +213,25 @@ void affondaNave( tab *ptemp, int x, int y ){
 	
 	char s;
 	
-	if ( ptemp->campo[x][y] == 'X' || ptemp->campo[x][y] == 'O' ){
+	if (pointTemp->campo[x][y] == 'X' || pointTemp->campo[x][y] == 'O' ){
 
 		printf("\nHai gia colpito questo punto");
 			
-	} else if ( ptemp->cont[x][y] >= 48 && ptemp->cont[x][y] <= 61 ){
+	} else if (pointTemp->cont[x][y] >= 48 && pointTemp->cont[x][y] <= 61 ){
 		
 		// Assegna il carattere 'X' solo dopo la verifica
-    	ptemp->campo[x][y] = 'X';
+    	pointTemp->campo[x][y] = 'X';
 		
-		s = ptemp->cont[x][y];
+		s = pointTemp->cont[x][y];
 		
 		for( i = 3; i < r; i++ ){
 			for( j = 3; j < c; j++ ){
 						
-				if( ptemp->cont[i][j] == s ){
+				if(pointTemp->cont[i][j] == s ){
 					
 					len++;
 					
-					if( ptemp->campo[i][j] == 'X' ){
+					if(pointTemp->campo[i][j] == 'X' ){
 						
 						t++;
 					}
@@ -242,18 +242,18 @@ void affondaNave( tab *ptemp, int x, int y ){
 		
 		if ( len == t ){
 			
-			ptemp->nv--;
+			pointTemp->nv--;
 		}
 	}
 }
 
 
-// estrae l'input per generare coordinate giocatore
-void giocatore( tab **ptesta ,char xx, int y ){
+// genera coordinate leggendo l'input del giocatore
+void giocatore(tab **pointHead , char xx, int y ){
 	
-	tab *ptemp = (*ptesta);
-	
-	ptemp = ptemp->pnext;
+	tab *pointTemp = (*pointHead);
+
+    pointTemp = pointTemp->pnext;
 	
 	int x = 3, i;
     
@@ -281,13 +281,13 @@ void giocatore( tab **ptesta ,char xx, int y ){
 		
 		y = n;
 		
-		if (  ptemp->cont[x][y] != ' ' ){
+		if (pointTemp->cont[x][y] != ' ' ){
 		
-			affondaNave( ptemp, x, y );
+			affondaNave(pointTemp, x, y );
 			
 		} else {
-			
-			ptemp->campo[x][y] = 'O';
+
+            pointTemp->campo[x][y] = 'O';
 		}
 			
 	} else {
@@ -298,9 +298,9 @@ void giocatore( tab **ptesta ,char xx, int y ){
 
 
 // genera numeri casuali per le coordinate cpu
-void computer( tab **ptesta ){
+void computer( tab **pointHead ){
 	
-	tab *ptemp = (*ptesta);
+	tab *pointTemp = (*pointHead);
 
     int x, y;
 	
@@ -312,25 +312,25 @@ void computer( tab **ptesta ){
         x = xx[ rand() % 10 ];
         y = yy[ rand() % 10 ];
 
-    }while( ptemp->campo[x][y] == 'X' || ptemp->campo[x][y] == 'O' );
+    }while(pointTemp->campo[x][y] == 'X' || pointTemp->campo[x][y] == 'O' );
 
 	
-	if ( ptemp->campo[x][y] != ' ' ){
+	if (pointTemp->campo[x][y] != ' ' ){
 		
-		affondaNave( ptemp, x, y );
+		affondaNave(pointTemp, x, y );
 		
 	} else {
-		
-		ptemp->campo[x][y] = 'O';
+
+        pointTemp->campo[x][y] = 'O';
 	}
 }
 
 
-void stampa( tab *ptesta ){
+void stampa( tab *pointHead ){
 
     int i, j;
 
-    tab *ptemp = ptesta;
+    tab *pointTemp = pointHead;
 
     // stampo il campo del giocatore
     printf("\n\n\t\t\t\t\tIl tuo Campo:\t\t\t\t  Campo del computer:");
@@ -341,41 +341,41 @@ void stampa( tab *ptesta ){
         // Stampare il campo del giocatore
         for( j = 0; j < c; j++ ){
 
-            printf(/*ANSI_COLOR_RED*/"%c"/*ANSI_COLOR_RESET*/, ptemp->campo[i][j]);
+            printf(/*ANSI_COLOR_RED*/"%c"/*ANSI_COLOR_RESET*/, pointTemp->campo[i][j]);
         }
 
         // Separatore tra i due campi
         printf("\t\t\t\t");
 
         // Stampare il campo del computer in una seconda matrice
-        ptemp = ptemp->pnext;
+        pointTemp = pointTemp->pnext;
 
         for( j = 0; j < c; j++ ){
 
-            if( ptemp->cont[i][j] >= 48 && ptemp->cont[i][j] <= 62 && ptemp->cont[i][j] != ptemp->campo[i][j] && ptemp->campo[i][j] != 'X' ){
+            if(pointTemp->cont[i][j] >= 48 && pointTemp->cont[i][j] <= 62 && pointTemp->cont[i][j] != pointTemp->campo[i][j] && pointTemp->campo[i][j] != 'X' ){
 
-                //ptemp->campo[i][j] = ' ';
+                //pointTemp->campo[i][j] = ' ';
                 printf(" ");
             } else {
 
-                printf(/*ANSI_COLOR_RED*/"%c"/*ANSI_COLOR_RESET*/, ptemp->campo[i][j]);
+                printf(/*ANSI_COLOR_RED*/"%c"/*ANSI_COLOR_RESET*/, pointTemp->campo[i][j]);
             }
 
         }
 
         printf("\n");
-        ptemp = ptesta;
+        pointTemp = pointHead;
     }
-    ptemp = ptesta;
+    pointTemp = pointHead;
 }
 
 
 // inizializza il gioco
-int gioco( tab *ptesta ){
+int gioco( tab *pontHead ){
 	
-	campoDiGioco( &ptesta, 2 );
+	campoDiGioco(&pontHead, 2 );
 
-	tab *ptemp = ptesta;
+	tab *pointTemp = pontHead;
     
     printf("\nGioca!! ");
     
@@ -383,11 +383,11 @@ int gioco( tab *ptesta ){
 	
 	do{ // loop game
 
-        stampa( ptesta );
+        stampa(pontHead );
 		// prendo le coordinate
-		printf("\n\t\t\t\t\tHai %d navi rimaste", ptemp->nv);
-		ptemp = ptemp->pnext;
-		printf("\n\t\t\t\t\tIl computer ha %d navi rimaste", ptemp->nv);
+		printf("\n\t\t\t\t\tHai %d navi rimaste", pointTemp->nv);
+        pointTemp = pointTemp->pnext;
+		printf("\n\t\t\t\t\tIl computer ha %d navi rimaste", pointTemp->nv);
 		
 		int y = 0;
 		char xx;
@@ -402,16 +402,16 @@ int gioco( tab *ptesta ){
     		printf("\nInserisci delle coordinate sensate");
 		} else {
 			
-			giocatore( &ptesta, xx, y );// richiamo funzione giocatore
+			giocatore(&pontHead, xx, y );// richiamo funzione giocatore
 			
-			computer( &ptesta ); // richiamo funzione cpu
+			computer( &pontHead ); // richiamo funzione cpu
 		}
+
+        pointTemp = pontHead;
     	
-    	ptemp = ptesta;
+    	pointTemp = pointTemp->pnext;
     	
-    	tab *ptemp2 = ptemp->pnext;
-    	
-    	if ( ptemp->nv == 0 ){ // controllo chi ha vinto la partita
+    	if (pointTemp->nv == 0 ){ // controllo chi ha vinto la partita
     		
     		printf("\nIl computer ha vinto addio NOOB");
     		
@@ -419,7 +419,7 @@ int gioco( tab *ptesta ){
     		
     		score++;
 		
-		} else if ( ptemp2->nv == 0 ){
+		} else if (pointTemp->nv == 0 ){
 			
 			printf("\nhai vinto addio");
 			
@@ -455,7 +455,7 @@ void menu(){
     scanf("%d",&n);
     */
     
-    tab *ptesta = NULL;
+    tab *pointHead = NULL;
     
     do {
     	
@@ -472,7 +472,7 @@ void menu(){
 			
 			case 1:{
 				
-		        gioco( ptesta );
+		        gioco(pointHead );
 		        		        
 		        break;
 		    }
@@ -484,7 +484,7 @@ void menu(){
 				
 				} else {
 					
-					//stampa( ptesta );
+					//stampa( pTab );
 				}
 				
 		        break;
