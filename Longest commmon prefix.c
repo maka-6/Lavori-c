@@ -2,11 +2,11 @@
 	Nome: Longest common prefix
 	Copyright: xx
 	Autore: Youness Makaoui
-	Luogo:
-	Versione:
-	Componenti:
-	Data:
-	Descrizione:
+	Luogo: Home
+	Versione: xx
+	Componenti: xx
+	Data: xx
+	Descrizione: xx
 */
 
 #include <stdio.h>
