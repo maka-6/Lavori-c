@@ -6,13 +6,16 @@
 	Versione: xx
 	Componenti: xx
 	Data: xx
-	Descrizione: xx
+	Descrizione:
+ 		- soluzione problema n. su leetcode
 */
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
+
+// Leetcoode problem solution
 char * longestCommonPrefix( char ** strs, int strsSize ){
 
     int i, min, max;
@@ -68,11 +71,4 @@ char * longestCommonPrefix( char ** strs, int strsSize ){
     }
 
     return prefix;
-}
-
-int main(){
-	
-	
-	
-	exit (0);
 }
