@@ -2,77 +2,37 @@
 	Nome: Longest common prefix
 	Copyright: xx
 	Autore: Youness Makaoui
-	Luogo:
-	Versione:
-	Componenti:
-	Data:
+	Luogo: Home
+	Versione: xx
+	Componenti: xx
+	Data: xx
 	Descrizione:
+ 		- soluzione problema n. 14 Longest Common Prefix su leetcode
 */
 
-#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-char * longestCommonPrefix( char ** strs, int strsSize ){
 
-    int i, min, max;
-    
-    for( i = 0; i < strsSize-1; i++ ){
-
-        max = strlen( strs[i] );
-        min = strlen( strs[i+1] );
-        if( max < min ){
-            max = min;
-        }
-    }int i, min, max;
-    
-    for( i = 0; i < strsSize-1; i++ ){
-
-        max = strlen( strs[i] );
-        min = strlen( strs[i+1] );
-        if( max < min ){
-            max = min;
-        }
+// Leetcoode problem solution
+char* longestCommonPrefix(char** strs, int strsSize) {
+    if (strsSize < 1) {
+        return NULL;  // No common prefix for an empty array
     }
 
-    char prefix[min];
-    strcpy( prefix, """" );
-    char foundF;
-    i = 0;
-    int n = 0;
+    int prefixLen = strlen(strs[0]);
+    char* prefix = (char*)malloc((prefixLen + 1) * sizeof(char));
 
-    for( i = 0; i < strsSize; i++ ){
-        foundF = strs[0][i];
-        for( int j = 0; j < min-1; j++ ){
-            
-            if( (strstr( strs[j+1], foundF )) != NULL ){
-                n++;
-            }
+    // Copy the first string to the prefix
+    strcpy(prefix, strs[0]);
+
+    for (int i = 1; i < strsSize; ++i) {
+        int j = 0;
+        while (strs[i][j] && prefix[j] == strs[i][j]) {
+            ++j;
         }
-    }
-
-    if( n == strsSize ){
-
-        n = 0;
-        for( i = 0; i < strsSize; i++ ){
-
-            if( (strstr( strs[i], prefix )) != NULL ){
-                n++;
-            }
-        }
-        
-        if( n == strsSize ){
-			
-			
-		}
+        prefix[j] = '\0';  // Null-terminate the prefix at the mismatch point
     }
 
     return prefix;
-}
-
-int main(){
-	
-	
-	
-	exit (0);
 }

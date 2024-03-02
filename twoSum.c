@@ -1,17 +1,16 @@
 /*
 	Nome: Two Sum
-	Copyright:
-	Autore:
-	Luogo:
-	Versione:
-	Componenti:
-	Data:
-	Descrizione:
+	Copyright: xx
+	Autore: Makaoui Youness
+	Luogo: Home 
+	Versione: xx
+	Componenti: xx
+	Data: xx
+	Descrizione: soluzione problema n. 1. Two Sum su leetcode
 */
 
 #include <stdio.h>
 #include <stdlib.h>
-
 
 int* twoSum( int* nums, int numsSize, int target, int* returnSize ){
 	
