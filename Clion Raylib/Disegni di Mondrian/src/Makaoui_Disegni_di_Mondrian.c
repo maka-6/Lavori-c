@@ -1,18 +1,19 @@
 /*
- * Nome: Disegni di Mondrian
- * Autore: Youness Makaoui
- * Luogo: Home
- * Data: 14/12/2023
- * Descrizione:
+    * Nome: Disegni di Mondrian
+    * Autore: Youness Makaoui
+    * Luogo: Home
+    * Data: 14/12/2023
+    * Descrizione:
         - il programma controlla autenticità di un quadro di Mondrian
  */
 
-#include "Geometry.h"
+#include "Code/Geometry.h"
+#include "Code/paint_square.c"
 
 // legge la prima riga del file per il lato del quadrato e numero segmenti
-FILE* sizeSegment( int *N, int *L,  char *fileName ){
+FILE* sizeSegment( struct Mondrian *paint ){
 
-    FILE* pointFile = fopen(fileName, "r" );
+    FILE* pointFile = fopen("Data/disegno.txt", "r" );
 
     int check = getc( pointFile );
 
@@ -23,9 +24,9 @@ FILE* sizeSegment( int *N, int *L,  char *fileName ){
             // riposiziono il cursore all'inizio del file
             ungetc(check, pointFile);
 
-            fscanf(pointFile, "%d %d", N, L );
+            fscanf(pointFile, "%d %d", &paint->nSeg, &paint->lSquare );
 
-            if ( N == 0 || L == 0 ){
+            if ( paint->nSeg == 0 || paint->lSquare == 0 ){
 
                 return NULL;
             }
@@ -34,113 +35,96 @@ FILE* sizeSegment( int *N, int *L,  char *fileName ){
         return pointFile;
     }
 
-    return NULL;
+    exit(5);
 }
 
 // carica i dati nel file in due segmenti
-int Load( Dot *A, Dot *B, FILE *pointFile, int N, int L ){
+int Load( Dot *A, Dot *B, FILE *pointFile, struct Mondrian Paint ){
 
     int i;
 
-    for (i = 0; i < N; i++) {
+    for (i = 0; i < Paint.nSeg; i++) {
+
         // Inserimento dei dati per ogni segmento dal file
         fscanf(pointFile, "%d %d %d %d", &A[i].x, &A[i].y, &B[i].x, &B[i].y );
-    }
-    for (i = 0; i < N; ++i) {
 
-        if (( A[i].x > L || A[i].x < 0 )||( A[i].y > L || A[i].y < 0 )||( B[i].x > L || B[i].x < 0 )||( B[i].y > L || B[i].y < 0 )){
-            // chiudo il file
-            fclose(pointFile );
+    }
+
+    for (i = 0; i < Paint.nSeg; ++i) {
+
+        if (( A[i].x > Paint.lSquare || A[i].x < 0 )||( A[i].y > Paint.lSquare || A[i].y < 0 )||( B[i].x > Paint.lSquare || B[i].x < 0 )||( B[i].y > Paint.lSquare || B[i].y < 0 )){
+
             return 0;
         }
     }
-    // chiudo il file
-    fclose(pointFile );
 
     return 1;
 }
 
-void paint( Screen scr, int lSquare );
-
 int main(){
-
-    // nome del file
-    char fileName[DIM] = "disegno.txt";
 
     printf("\n                [ !!ATTENZIONE!! ]"
                   "\n[ il File di testo deve rispettare un preciso formato ]");
     printf("\n-------------------------------------------------------\n"
-                  "         [ cercare esempio.txt in ./src/ ]\n");
+                  "         [ cercare esempio.txt in ./src/Data ]\n");
 
     // numero di segmenti
-    int nSegment;
     // misura del alto del quadrato
-    int lSquare;
+
+    struct Mondrian Paint;
 
     // il file
-    FILE* pointFile = sizeSegment(&nSegment, &lSquare, fileName );
+    FILE* pointFile = sizeSegment( &Paint );
 
-    if ( pointFile != NULL ){
+    if ( Paint.nSeg > 1 && Paint.lSquare > 1 ){
 
-        if ( nSegment > 0 && lSquare > 0 ){
+        Dot A[Paint.nSeg];
+        Dot B[Paint.nSeg];
 
-            Dot A[nSegment];
-            Dot B[nSegment];
+        int check = Load( A, B, pointFile, Paint );
 
-            int check = Load(A, B, pointFile, nSegment, lSquare );
+        // chiudo il file
+        fclose(pointFile );
 
-            if ( check == 0 ){
+        if ( check == 0 ){
 
-                // esco se i dati sono illeggibili o errati
-                printf("\nERRORE, File illeggibile o Dati non Validi");
-                printf("\n------------------------------------------\n"
-                              "            Riavviare e riprovare\n");
-                return 0;
-            }
-
-            printf("\nLettura avvenuta correttamente\n");
-
-            // inizializzo la finestra
-            InitWindow(screen.width, screen.height, "Mostra su Mondrian");
-            screen.width = GetScreenWidth();
-            screen.height = GetScreenHeight();
-
-            // imposto un target di fps
-            SetTargetFPS(144);
-
-            while (!WindowShouldClose()){
-
-                BeginDrawing();
-                paint(screen, lSquare * 30);
-                EndDrawing();
-
-            }
-            // chiudo la finestra
-            CloseWindow();
-
-        } else {
-            // esco se i dati sono errati
-            printf("\nERRORE, Dati non Validi");
-            printf("\n------------------------\n"
-                   "Riavviare e riprovare");
+            // esco se i dati sono illeggibili o errati
+            printf("\nERRORE, File illeggibile o Dati non Validi");
+            printf("\n------------------------------------------\n"
+                          "            Riavviare e riprovare\n");
+            return 0;
         }
+
+        printf("\nLettura avvenuta correttamente\n");
+
+        // inizializzo la finestra
+        InitWindow(screen.width, screen.height, "Mostra su Mondrian");
+        screen.width = GetScreenWidth();
+        screen.height = GetScreenHeight();
+
+        Dot cent = center( screen.height, screen.width );
+
+        // imposto un target di fps
+        SetTargetFPS(144);
+
+        Texture2D texture = LoadTexture("texture/paint_background.png");
+
+        while (!WindowShouldClose()){
+
+            BeginDrawing();
+            paint( (Paint.lSquare+18)*10, cent, texture );
+            EndDrawing();
+
+        }
+        // chiudo la finestra
+        CloseWindow();
+
     } else {
-        // esco se non trovo nessun file
-        printf("\nERRORE, File non trovato");
-        printf("\n-------------------------\n"
-               "Riavviare e riprovare\n");
+        // esco se i dati sono errati
+        printf("\nERRORE, Dati non Validi");
+        printf("\n------------------------\n"
+               "Riavviare e riprovare");
     }
 
     return (0);
-}
-
-// lavora sul frame per renderizzare il quadro
-void paint(Screen scr, int lSquare ){
-
-    Dot cent = center( scr.height, scr.width );
-    ClearBackground(RAYWHITE);
-    DrawText( "Quadro di Piet Mondrian:",  cent.x / 2, cent.y - lSquare, 80, RED);
-    DrawRectangle( cent.x  - (lSquare/2), cent.y, lSquare, lSquare, RED );
-    DrawRectangle( cent.x, cent.y, lSquare / 2, lSquare / 2, BLACK);
-
 }

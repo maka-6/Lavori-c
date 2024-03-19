@@ -3,11 +3,19 @@
 #define MAKAOUI_DISEGNI_DI_MONDRIAN_C_GEOMETRY_H
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <conio.h>
 #include <math.h>
 #include "raylib.h"
 
 #define DIM 16
+
+struct Mondrian{
+
+    int nSeg;
+    int lSquare;
+
+};
 
 typedef struct{
 
@@ -22,16 +30,17 @@ int distance( Dot a, Dot b ){
     tmp=pow(a.x-b.x,2);
     tmp+=pow(a.y-b.y,2);
     return (int)sqrt(tmp);
+
 }
 
 Dot center( int screenHeight, int screenWidth ){
 
-    Dot cen;
+    Dot cent;
 
-    cen.x = screenWidth / 2;
-    cen.y = screenHeight / 2;
+    cent.x = screenWidth / 2;
+    cent.y = screenHeight / 2;
 
-    return cen;
+    return cent;
 }
 
 typedef struct{
@@ -42,5 +51,6 @@ typedef struct{
 }Screen;
 
 Screen screen;
+
 
 #endif //MAKAOUI_DISEGNI_DI_MONDRIAN_C_GEOMETRY_H
