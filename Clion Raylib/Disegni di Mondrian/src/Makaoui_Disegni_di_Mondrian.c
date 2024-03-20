@@ -54,10 +54,10 @@ int Load( Segments segment, FILE *pointFile, struct Mondrian Paint ){
     for (i = 0; i < Paint.nSeg; ++i) {
 
         if (( segment.A[i].x > Paint.lSquare || segment.A[i].x < 0 )||( segment.A[i].y > Paint.lSquare || segment.A[i].y < 0 )){
-            return 0;
 
-        } else if (( segment.B[i].x > Paint.lSquare || segment.B[i].x < 0 )||( segment.B[i].y > Paint.lSquare || segment.B[i].y < 0 )){
-
+            if (( segment.B[i].x > Paint.lSquare || segment.B[i].x < 0 )||( segment.B[i].y > Paint.lSquare || segment.B[i].y < 0 )){
+                return 0;
+            }
             return 0;
         }
     }
