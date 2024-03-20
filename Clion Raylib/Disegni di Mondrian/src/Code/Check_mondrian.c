@@ -6,3 +6,7 @@
     * Descrizione:
         - controlla i segmenti del quadro
 */
+
+void check(){
+
+}

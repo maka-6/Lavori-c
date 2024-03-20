@@ -7,7 +7,7 @@
         - disegna sulla finestra un quadro di Mondrian
 */
 
-void squarePaint( int lSquare, Dot cent, Texture2D texture ){
+void squarePaint( int lSquare, struct Dot cent, Texture2D texture ){
 
     DrawTexture( texture, cent.x - (lSquare / 2) - 25, cent.y - 25, WHITE );
     DrawRectangle( cent.x  - (lSquare/2), cent.y, lSquare, lSquare, VIOLET );
@@ -17,7 +17,7 @@ void squarePaint( int lSquare, Dot cent, Texture2D texture ){
 }
 
 // renderizza il quadro
-void paint( int lSquare, Dot cent, Texture2D texture ){
+void paint( int lSquare, struct Dot cent, Texture2D texture ){
 
     ClearBackground(LIGHTGRAY);
     DrawText( "Quadro di Piet Mondrian:",  cent.x / 2, cent.y - lSquare, 80, VIOLET);

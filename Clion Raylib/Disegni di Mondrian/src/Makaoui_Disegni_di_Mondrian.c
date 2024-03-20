@@ -9,6 +9,7 @@
 
 #include "Code/Geometry.h"
 #include "Code/paint_square.c"
+#include "Code/Check_mondrian.c"
 
 // legge la prima riga del file per il lato del quadrato e numero segmenti
 FILE* sizeSegment( struct Mondrian *paint ){
@@ -39,20 +40,23 @@ FILE* sizeSegment( struct Mondrian *paint ){
 }
 
 // carica i dati nel file in due segmenti
-int Load( Dot *A, Dot *B, FILE *pointFile, struct Mondrian Paint ){
+int Load( Segments segment, FILE *pointFile, struct Mondrian Paint ){
 
     int i;
 
     for (i = 0; i < Paint.nSeg; i++) {
 
         // Inserimento dei dati per ogni segmento dal file
-        fscanf(pointFile, "%d %d %d %d", &A[i].x, &A[i].y, &B[i].x, &B[i].y );
+        fscanf(pointFile, "%d %d %d %d", &segment.A[i].x, &segment.A[i].y, &segment.B[i].x, &segment.B[i].y );
 
     }
 
     for (i = 0; i < Paint.nSeg; ++i) {
 
-        if (( A[i].x > Paint.lSquare || A[i].x < 0 )||( A[i].y > Paint.lSquare || A[i].y < 0 )||( B[i].x > Paint.lSquare || B[i].x < 0 )||( B[i].y > Paint.lSquare || B[i].y < 0 )){
+        if (( segment.A[i].x > Paint.lSquare || segment.A[i].x < 0 )||( segment.A[i].y > Paint.lSquare || segment.A[i].y < 0 )){
+            return 0;
+
+        } else if (( segment.B[i].x > Paint.lSquare || segment.B[i].x < 0 )||( segment.B[i].y > Paint.lSquare || segment.B[i].y < 0 )){
 
             return 0;
         }
@@ -78,10 +82,11 @@ int main(){
 
     if ( Paint.nSeg > 1 && Paint.lSquare > 1 ){
 
-        Dot A[Paint.nSeg];
-        Dot B[Paint.nSeg];
+        Segments segment;
+        segment.A = (struct Dot*) malloc(Paint.nSeg * sizeof(struct Dot));
+        segment.B = (struct Dot*) malloc(Paint.nSeg * sizeof(struct Dot));
 
-        int check = Load( A, B, pointFile, Paint );
+        int check = Load( segment, pointFile, Paint );
 
         // chiudo il file
         fclose(pointFile );
@@ -102,7 +107,7 @@ int main(){
         screen.width = GetScreenWidth();
         screen.height = GetScreenHeight();
 
-        Dot cent = center( screen.height, screen.width );
+        struct Dot cent = center( screen.height, screen.width );
 
         // imposto un target di fps
         SetTargetFPS(144);

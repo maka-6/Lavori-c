@@ -17,14 +17,21 @@ struct Mondrian{
 
 };
 
-typedef struct{
+struct Dot{
 
     int x;
     int y;
 
-} Dot;
+};
 
-int distance( Dot a, Dot b ){
+typedef struct {
+
+    struct Dot *A;
+    struct Dot *B;
+
+}Segments;
+
+int distance( struct Dot a, struct Dot b ){
 
     double tmp;
     tmp=pow(a.x-b.x,2);
@@ -33,9 +40,9 @@ int distance( Dot a, Dot b ){
 
 }
 
-Dot center( int screenHeight, int screenWidth ){
+struct Dot center( int screenHeight, int screenWidth ){
 
-    Dot cent;
+    struct Dot cent;
 
     cent.x = screenWidth / 2;
     cent.y = screenHeight / 2;
