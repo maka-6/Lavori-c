@@ -92,6 +92,10 @@ int main(){
             printf("\nERRORE, File illeggibile o Dati non Validi");
             printf("\n------------------------------------------\n"
                           "            Riavviare e riprovare\n");
+
+            // Libera la memoria allocata per i segmenti
+            free(segment.A);
+            free(segment.B);
             return 0;
         }
 
@@ -119,12 +123,18 @@ int main(){
         // chiudo la finestra
         CloseWindow();
 
+        // Libera la memoria allocata per i segmenti
+        free(segment.A);
+        free(segment.B);
+
+
     } else {
         // esco se i dati sono errati
         printf("\nERRORE, Dati non Validi");
         printf("\n------------------------\n"
                "Riavviare e riprovare");
     }
+
 
     return (0);
 }
