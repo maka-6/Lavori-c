@@ -10,6 +10,7 @@
 
 #define DIM 16
 
+//
 struct Mondrian{
 
     int nSeg;
@@ -17,6 +18,7 @@ struct Mondrian{
 
 };
 
+// punto
 struct Dot{
 
     int x;
@@ -24,6 +26,7 @@ struct Dot{
 
 };
 
+// segmenti
 typedef struct {
 
     struct Dot *A;
@@ -31,6 +34,7 @@ typedef struct {
 
 }Segments;
 
+// distanza tra due punti
 int distance( struct Dot a, struct Dot b ){
 
     double tmp;
@@ -40,6 +44,7 @@ int distance( struct Dot a, struct Dot b ){
 
 }
 
+// centro dello schermo
 struct Dot center( int screenHeight, int screenWidth ){
 
     struct Dot cent;
@@ -50,6 +55,7 @@ struct Dot center( int screenHeight, int screenWidth ){
     return cent;
 }
 
+// struct schermo
 typedef struct{
 
     int height;
@@ -59,6 +65,5 @@ typedef struct{
 
 //
 Screen screen;
-
 
 #endif //MAKAOUI_DISEGNI_DI_MONDRIAN_C_GEOMETRY_H

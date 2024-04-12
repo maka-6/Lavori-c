@@ -16,14 +16,9 @@ FILE* sizeSegment( struct Mondrian *paint ){
 
     FILE* pointFile = fopen("Data/disegno.txt", "r" );
 
-    int check = getc( pointFile );
-
     if( pointFile != NULL ){
 
-        if ( check != EOF ) {
-
-            // riposiziono il cursore all'inizio del file
-            ungetc(check, pointFile);
+        if ( feof(pointFile) != EOF ) {
 
             fscanf(pointFile, "%d %d", &paint->nSeg, &paint->lSquare );
 

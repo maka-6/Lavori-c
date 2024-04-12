@@ -7,6 +7,7 @@
         - disegna sulla finestra un quadro di Mondrian
 */
 
+// disegna le forme all'interno del quadro
 void squarePaint( int lSquare, struct Dot cent, Texture2D texture ){
 
     DrawTexture( texture, cent.x - (lSquare / 2) - 25, cent.y - 25, WHITE );
