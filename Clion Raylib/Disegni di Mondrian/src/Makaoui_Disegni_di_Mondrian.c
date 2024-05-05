@@ -31,6 +31,7 @@ FILE* sizeSegment( struct Mondrian *paint ){
         return pointFile;
     }
 
+    printf("\nOut of memory");
     exit(5);
 }
 
@@ -83,9 +84,6 @@ int main(){
 
         int check = Load( segment, pointFile, Paint );
 
-        // chiudo il file
-        fclose(pointFile );
-
         if ( check == 0 ){
 
             // esco se i dati sono illeggibili o errati
@@ -96,6 +94,8 @@ int main(){
             // Libera la memoria allocata per i segmenti
             free(segment.A);
             free(segment.B);
+            // chiudo il file
+            fclose(pointFile );
             return 0;
         }
 
@@ -127,7 +127,6 @@ int main(){
         free(segment.A);
         free(segment.B);
 
-
     } else {
         // esco se i dati sono errati
         printf("\nERRORE, Dati non Validi");
@@ -135,6 +134,7 @@ int main(){
                "Riavviare e riprovare");
     }
 
-
+    // chiudo il file
+    fclose(pointFile );
     return (0);
 }

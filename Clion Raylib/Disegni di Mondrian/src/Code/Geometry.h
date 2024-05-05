@@ -8,7 +8,7 @@
 #include <math.h>
 #include "raylib.h"
 
-#define DIM 16
+
 
 //
 struct Mondrian{
