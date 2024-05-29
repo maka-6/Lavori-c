@@ -23,14 +23,11 @@ FILE* sizeSegment( struct Mondrian *paint ){
             fscanf(pointFile, "%d %d", &paint->nSeg, &paint->lSquare );
 
             if ( paint->nSeg == 0 || paint->lSquare == 0 ){
-
                 return NULL;
             }
         }
-
         return pointFile;
     }
-
     printf("\nOut of memory");
     exit(5);
 }
@@ -41,10 +38,8 @@ int Load( Segments segment, FILE *pointFile, struct Mondrian Paint ){
     int i;
 
     for (i = 0; i < Paint.nSeg; i++) {
-
         // Inserimento dei dati per ogni segmento dal file
         fscanf(pointFile, "%d %d %d %d", &segment.A[i].x, &segment.A[i].y, &segment.B[i].x, &segment.B[i].y );
-
     }
 
     for (i = 0; i < Paint.nSeg; ++i) {
@@ -57,7 +52,6 @@ int Load( Segments segment, FILE *pointFile, struct Mondrian Paint ){
             return 0;
         }
     }
-
     return 1;
 }
 
@@ -72,7 +66,6 @@ int main(){
     // misura del alto del quadrato
 
     struct Mondrian Paint;
-
     // il file
     FILE* pointFile = sizeSegment( &Paint );
 
@@ -82,6 +75,13 @@ int main(){
         segment.A = (struct Dot*) malloc(Paint.nSeg * sizeof(struct Dot));
         segment.B = (struct Dot*) malloc(Paint.nSeg * sizeof(struct Dot));
 
+        if ( segment.A == NULL || segment.B == NULL ){
+
+            printf("\nOut of memory");
+            // chiudo il file
+            fclose(pointFile );
+            return 5;
+        }
         int check = Load( segment, pointFile, Paint );
 
         if ( check == 0 ){
@@ -98,7 +98,6 @@ int main(){
             fclose(pointFile );
             return 0;
         }
-
         printf("\nLettura avvenuta correttamente\n");
 
         // inizializzo la finestra
@@ -118,11 +117,9 @@ int main(){
             BeginDrawing();
             paint( (Paint.lSquare+18)*10, cent, texture );
             EndDrawing();
-
         }
         // chiudo la finestra
         CloseWindow();
-
         // Libera la memoria allocata per i segmenti
         free(segment.A);
         free(segment.B);
@@ -133,8 +130,7 @@ int main(){
         printf("\n------------------------\n"
                "Riavviare e riprovare");
     }
-
     // chiudo il file
     fclose(pointFile );
-    return (0);
+    return 0;
 }

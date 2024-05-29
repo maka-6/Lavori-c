@@ -7,7 +7,4 @@
         - controlla i segmenti del quadro
 */
 
-void check(){
-
-
-}
+void check(){}
