@@ -9,13 +9,12 @@
 
 #include "Code/Geometry.h"
 #include "Code/paint_square.c"
-#include "Code/Check_mondrian.c"
+#include "Code/Check_segments.c"
 
 // legge la prima riga del file per il lato del quadrato e numero segmenti
-FILE* sizeSegment( struct Mondrian *paint ){
+FILE* sizeSegment( Mondrian *paint ){
 
     FILE* pointFile = fopen("Data/disegno.txt", "r" );
-
     if( pointFile != NULL ){
 
         if ( feof(pointFile) != EOF ) {
@@ -33,20 +32,20 @@ FILE* sizeSegment( struct Mondrian *paint ){
 }
 
 // carica i dati nel file in due segmenti
-int Load( Segments segment, FILE *pointFile, struct Mondrian Paint ){
+int Load( Mondrian *Paint, FILE *pointFile ){
 
     int i;
 
-    for (i = 0; i < Paint.nSeg; i++) {
+    for (i = 0; i < Paint->nSeg; i++) {
         // Inserimento dei dati per ogni segmento dal file
-        fscanf(pointFile, "%d %d %d %d", &segment.A[i].x, &segment.A[i].y, &segment.B[i].x, &segment.B[i].y );
+        fscanf(pointFile, "%d %d %d %d", &Paint->A[i].x, &Paint->A[i].y, &Paint->B[i].x, &Paint->B[i].y );
     }
 
-    for (i = 0; i < Paint.nSeg; ++i) {
+    for (i = 0; i < Paint->nSeg; ++i) {
 
-        if (( segment.A[i].x > Paint.lSquare || segment.A[i].x < 0 )||( segment.A[i].y > Paint.lSquare || segment.A[i].y < 0 )){
+        if (( Paint->A[i].x > Paint->lSquare || Paint->A[i].x < 0 )||( Paint->A[i].y > Paint->lSquare || Paint->A[i].y < 0 )){
 
-            if (( segment.B[i].x > Paint.lSquare || segment.B[i].x < 0 )||( segment.B[i].y > Paint.lSquare || segment.B[i].y < 0 )){
+            if (( Paint->B[i].x > Paint->lSquare || Paint->B[i].x < 0 )||( Paint->B[i].y > Paint->lSquare || Paint->B[i].y < 0 )){
                 return 0;
             }
             return 0;
@@ -62,50 +61,53 @@ int main(){
     printf("\n-------------------------------------------------------\n"
                   "         [ cercare esempio.txt in ./src/Data ]\n");
 
-    // numero di segmenti
-    // misura del alto del quadrato
-
-    struct Mondrian Paint;
+    Mondrian *paint;
+    paint = (Mondrian*) malloc(sizeof(Mondrian));
+    if ( paint == NULL ){
+        printf("\nOut of memory");
+        return 0;
+    }
     // il file
-    FILE* pointFile = sizeSegment( &Paint );
+    FILE* pointFile = sizeSegment( paint );
 
-    if ( Paint.nSeg > 1 && Paint.lSquare > 1 ){
+    if (paint->nSeg > 1 && paint->lSquare > 1 ){
 
-        Segments segment;
-        segment.A = (struct Dot*) malloc(Paint.nSeg * sizeof(struct Dot));
-        segment.B = (struct Dot*) malloc(Paint.nSeg * sizeof(struct Dot));
+        paint->A = (struct Dot*) malloc(paint->nSeg * sizeof(struct Dot));
+        paint->B = (struct Dot*) malloc(paint->nSeg * sizeof(struct Dot));
 
-        if ( segment.A == NULL || segment.B == NULL ){
+        if (paint->A == NULL || paint->B == NULL ){
 
             printf("\nOut of memory");
             // chiudo il file
             fclose(pointFile );
             return 5;
         }
-        int check = Load( segment, pointFile, Paint );
+        int check = Load(paint, pointFile );
 
         if ( check == 0 ){
-
             // esco se i dati sono illeggibili o errati
             printf("\nERRORE, File illeggibile o Dati non Validi");
             printf("\n------------------------------------------\n"
                           "            Riavviare e riprovare\n");
 
             // Libera la memoria allocata per i segmenti
-            free(segment.A);
-            free(segment.B);
+            free(paint->A);
+            free(paint->B);
             // chiudo il file
             fclose(pointFile );
             return 0;
         }
         printf("\nLettura avvenuta correttamente\n");
 
-        // inizializzo la finestra
-        InitWindow(screen.width, screen.height, "Mostra su Mondrian");
-        screen.width = GetScreenWidth();
-        screen.height = GetScreenHeight();
+        checkSeg(paint );
 
-        struct Dot cent = center( screen.height, screen.width );
+        int screenWidth = GetScreenWidth(), screenHeight = GetScreenHeight();
+        // inizializzo la finestra
+        InitWindow(screenWidth, screenHeight, "Mostra su Mondrian");
+        screenWidth = GetScreenWidth();
+        screenHeight = GetScreenHeight();
+
+        struct Dot cent = center( screenHeight, screenWidth );
 
         // imposto un target di fps
         SetTargetFPS(144);
@@ -113,16 +115,15 @@ int main(){
         Texture2D texture = LoadTexture("texture/paint_background.png");
 
         while (!WindowShouldClose()){
-
             BeginDrawing();
-            paint( (Paint.lSquare+18)*10, cent, texture );
+            draw((paint->lSquare + 18) * 10, cent, texture );
             EndDrawing();
         }
         // chiudo la finestra
         CloseWindow();
         // Libera la memoria allocata per i segmenti
-        free(segment.A);
-        free(segment.B);
+        free(paint->A);
+        free(paint->B);
 
     } else {
         // esco se i dati sono errati
@@ -132,5 +133,6 @@ int main(){
     }
     // chiudo il file
     fclose(pointFile );
+    free(paint);
     return 0;
 }
