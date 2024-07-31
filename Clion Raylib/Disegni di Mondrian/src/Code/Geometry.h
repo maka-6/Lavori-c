@@ -22,6 +22,14 @@ typedef struct {
     struct Dot *B;
 }Mondrian;
 
+//
+typedef struct Payload{
+    int num;
+    Mondrian *value;
+    struct Payload *left;
+    struct Payload *right;
+}Tree;
+
 // distanza tra due punti
 int distance( struct Dot a, struct Dot b ){
     double tmp;
@@ -37,7 +45,5 @@ struct Dot center( int screenHeight, int screenWidth ){
     cent.y = screenHeight / 2;
     return cent;
 }
-
-
 
 #endif //MAKAOUI_DISEGNI_DI_MONDRIAN_C_GEOMETRY_H

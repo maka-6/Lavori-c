@@ -8,14 +8,9 @@
 */
 
 //
-typedef struct Payload{
-    int num;
-    Mondrian *value;
-    struct Payload *left;
-    struct Payload *right;
-}Tree;
-
-void checkSeg( Mondrian *segments ){
+int checkSeg( Mondrian *segments ){
+    int check;
     Tree *mov;
     //
+    return check;
 }

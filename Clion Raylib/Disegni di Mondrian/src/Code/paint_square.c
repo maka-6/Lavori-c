@@ -18,6 +18,6 @@ void squarePaint( int lSquare, struct Dot cent, Texture2D texture ){
 // renderizza il quadro
 void draw( int lSquare, struct Dot cent, Texture2D texture ){
     ClearBackground(LIGHTGRAY);
-    DrawText( "Quadro di Piet Mondrian:",  cent.x / 2, cent.y - lSquare, 80, VIOLET);
+    DrawText( "Quadro di Piet Mondrian:",  cent.x / 2, cent.y - lSquare, ( cent.y * 2 ) / 13, VIOLET);
     squarePaint( lSquare, cent, texture );
 }

@@ -17,13 +17,11 @@ FILE* sizeSegment( Mondrian *paint ){
     FILE* pointFile = fopen("Data/disegno.txt", "r" );
     if( pointFile != NULL ){
 
+        // controllo che il file abbia contenuto
         if ( feof(pointFile) != EOF ) {
-
-            fscanf(pointFile, "%d %d", &paint->nSeg, &paint->lSquare );
-
-            if ( paint->nSeg == 0 || paint->lSquare == 0 ){
+            // controllo che i dati presi siano 2
+            if ( fscanf(pointFile, "%d %d", &paint->nSeg, &paint->lSquare ) != 2 )
                 return NULL;
-            }
         }
         return pointFile;
     }
@@ -32,26 +30,27 @@ FILE* sizeSegment( Mondrian *paint ){
 }
 
 // carica i dati nel file in due segmenti
-int Load( Mondrian *Paint, FILE *pointFile ){
+int LoadData(Mondrian *paint, FILE *pointFile ){
 
     int i;
 
-    for (i = 0; i < Paint->nSeg; i++) {
+    for (i = 0; i < paint->nSeg; i++) {
         // Inserimento dei dati per ogni segmento dal file
-        fscanf(pointFile, "%d %d %d %d", &Paint->A[i].x, &Paint->A[i].y, &Paint->B[i].x, &Paint->B[i].y );
+        if (fscanf(pointFile, "%d %d %d %d", &paint->A[i].x, &paint->A[i].y, &paint->B[i].x, &paint->B[i].y ) != 4 )
+            return 0;
     }
 
-    for (i = 0; i < Paint->nSeg; ++i) {
+    for (i = 0; i < paint->nSeg; ++i) {
 
-        if (( Paint->A[i].x > Paint->lSquare || Paint->A[i].x < 0 )||( Paint->A[i].y > Paint->lSquare || Paint->A[i].y < 0 )){
+        if ((paint->A[i].x > paint->lSquare || paint->A[i].x < 0 ) || (paint->A[i].y > paint->lSquare || paint->A[i].y < 0 )){
 
-            if (( Paint->B[i].x > Paint->lSquare || Paint->B[i].x < 0 )||( Paint->B[i].y > Paint->lSquare || Paint->B[i].y < 0 )){
-                return 0;
+            if ((paint->B[i].x > paint->lSquare || paint->B[i].x < 0 ) || (paint->B[i].y > paint->lSquare || paint->B[i].y < 0 )){
+                return 1;
             }
-            return 0;
+            return 1;
         }
     }
-    return 1;
+    return 0;
 }
 
 int main(){
@@ -61,30 +60,38 @@ int main(){
     printf("\n-------------------------------------------------------\n"
                   "         [ cercare esempio.txt in ./src/Data ]\n");
 
+    //
     Mondrian *paint;
     paint = (Mondrian*) malloc(sizeof(Mondrian));
+    //
     if ( paint == NULL ){
         printf("\nOut of memory");
         return 0;
     }
-    // il file
+    // il file dati
     FILE* pointFile = sizeSegment( paint );
 
+    if ( pointFile == NULL ){
+        printf("\nFile Illeggibile");
+        return 0;
+    }
+    // controllo che i valori siano validi
     if (paint->nSeg > 1 && paint->lSquare > 1 ){
 
+        // alloco memoria
         paint->A = (struct Dot*) malloc(paint->nSeg * sizeof(struct Dot));
         paint->B = (struct Dot*) malloc(paint->nSeg * sizeof(struct Dot));
 
+        // controllo se l'allocazione è avvenuta correttamente
         if (paint->A == NULL || paint->B == NULL ){
-
             printf("\nOut of memory");
             // chiudo il file
             fclose(pointFile );
             return 5;
         }
-        int check = Load(paint, pointFile );
 
-        if ( check == 0 ){
+        // controllo che il quadro è autentico
+        if ( LoadData(paint, pointFile) + checkSeg(paint ) == 0 ){
             // esco se i dati sono illeggibili o errati
             printf("\nERRORE, File illeggibile o Dati non Validi");
             printf("\n------------------------------------------\n"
@@ -97,20 +104,20 @@ int main(){
             fclose(pointFile );
             return 0;
         }
+
+        // buon fine
         printf("\nLettura avvenuta correttamente\n");
 
-        checkSeg(paint );
-
-        int screenWidth = GetScreenWidth(), screenHeight = GetScreenHeight();
+        int screenWidth, screenHeight;
         // inizializzo la finestra
-        InitWindow(screenWidth, screenHeight, "Mostra su Mondrian");
+        InitWindow(GetScreenWidth(), GetScreenHeight(), "Mostra su Mondrian");
         screenWidth = GetScreenWidth();
         screenHeight = GetScreenHeight();
 
         struct Dot cent = center( screenHeight, screenWidth );
 
         // imposto un target di fps
-        SetTargetFPS(144);
+        SetTargetFPS(114);
 
         Texture2D texture = LoadTexture("texture/paint_background.png");
 
