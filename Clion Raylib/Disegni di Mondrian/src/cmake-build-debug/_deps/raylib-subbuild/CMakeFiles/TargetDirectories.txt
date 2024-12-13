@@ -1,0 +1,3 @@
+C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/CMakeFiles/raylib-populate.dir
+C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/CMakeFiles/edit_cache.dir
+C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/CMakeFiles/rebuild_cache.dir

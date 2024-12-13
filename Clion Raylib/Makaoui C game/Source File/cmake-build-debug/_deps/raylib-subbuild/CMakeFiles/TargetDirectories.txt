@@ -1,0 +1,3 @@
+C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui C game/Source File/cmake-build-debug/_deps/raylib-subbuild/CMakeFiles/raylib-populate.dir
+C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui C game/Source File/cmake-build-debug/_deps/raylib-subbuild/CMakeFiles/edit_cache.dir
+C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui C game/Source File/cmake-build-debug/_deps/raylib-subbuild/CMakeFiles/rebuild_cache.dir

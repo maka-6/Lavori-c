@@ -1,0 +1,31 @@
+# ninja log v5
+2	234	7279847974350098	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-mkdir	a860886530bb3844
+18640	18836	7275546985904587	C:/Users/makao/OneDrive/Desktop/lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-done	eda98805a5ae80ed
+17537	17669	7275546974343682	C:/Users/makao/OneDrive/Desktop/lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-patch	6e88b8a85829b236
+1	122	7275546798849311	C:/Users/makao/OneDrive/Desktop/lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-mkdir	a9cb86b694e1bdc1
+235	8446	7279848056005598	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-download	c1f14a00ceef048c
+12732	12869	7279848100758515	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-install	28df23432d8b08d0
+17397	17537	7275546972987792	C:/Users/makao/OneDrive/Desktop/lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-update	2261ec3ad51dce96
+123	17397	7275546971556191	C:/Users/makao/OneDrive/Desktop/lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-download	49ff7d6f78f09c1d
+10155	12420	7279848095450372	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-configure	97e30932203869b1
+8446	8664	7279848058624992	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-update	b9270f7e98a56490
+8664	10154	7279848061331190	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-patch	55c5177efcaecaee
+10155	12420	7279848095450372	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-configure	97e30932203869b1
+17669	17853	7275546976085523	C:/Users/makao/OneDrive/Desktop/lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-configure	e17c5312f50a353c
+12421	12731	7279848099293803	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-build	9780aff41194e0ef
+17854	18311	7275546980709652	C:/Users/makao/OneDrive/Desktop/lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-build	da7971949d82049b
+12732	12869	7279848100758515	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-install	28df23432d8b08d0
+18640	18836	7275546985904587	C:/Users/makao/OneDrive/Desktop/lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/CMakeFiles/raylib-populate-complete	eda98805a5ae80ed
+18312	18499	7275546982631309	C:/Users/makao/OneDrive/Desktop/lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-install	e7d788c1645480d
+13180	13352	7279848105587673	CMakeFiles/raylib-populate-complete	848cafa1f47aedc4
+12870	13179	7279848103840647	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-test	849fa0d1f43d362d
+18500	18639	7275546984042665	C:/Users/makao/OneDrive/Desktop/lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-test	d11240d242c4711b
+13180	13352	7279848105587673	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-done	848cafa1f47aedc4
+2	234	7279847974350098	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-mkdir	a860886530bb3844
+235	8446	7279848056005598	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-download	c1f14a00ceef048c
+8446	8664	7279848058624992	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-update	b9270f7e98a56490
+8664	10154	7279848061331190	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-patch	55c5177efcaecaee
+12421	12731	7279848099293803	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-build	9780aff41194e0ef
+12870	13179	7279848103840647	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-test	849fa0d1f43d362d
+13180	13352	7279848105587673	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/CMakeFiles/raylib-populate-complete	848cafa1f47aedc4
+13180	13352	7279848105587673	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Makaoui battaglia navale 2D/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-done	848cafa1f47aedc4

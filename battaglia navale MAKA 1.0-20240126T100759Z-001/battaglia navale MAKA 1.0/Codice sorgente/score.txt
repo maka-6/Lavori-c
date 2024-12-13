@@ -1,0 +1,4 @@
+
+Vincitore: maka
+Navi rimaste alla cpu: 0
+Navi rimaste al giocatore: 12
