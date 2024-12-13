@@ -12,13 +12,7 @@
 		-Il programma simula un negozio di Gamestop
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-
-#define r 100
-#define d 1000
-
+#include "Data.h"
 
 //struct di un singolo prodotto
 typedef struct{
@@ -31,29 +25,21 @@ typedef struct{
     float price;// prezzo del prodotto
     int copy;// copie disponibili del prodotto
     
-}Pr;
+}Product;
 
 
-//sruct del carrello
+//struct del carrello
 typedef struct{
 	
-	Pr prod;
+	Product product;
 	
 }Carrello;
 
 
-struct credenziali{
-	
-	char name[r];
-	char password[r];
-	
-};
-
-
 typedef struct{
 	
-	struct credenziali User;
-	Carrello carre[d];
+	struct User *utente;
+	Carrello carrello[d];
 	
 }user;
 
@@ -67,40 +53,40 @@ int n2 = 0;
 
 
 //carica il file dentro l'array di struct
-int load ( Pr prod[] ){
+int load (Product prod[] ){
 
-    FILE *pfile = fopen("catalogo.txt","r+");
+    FILE *pointFile = fopen("catalogo.txt", "r+");
 
-    if ( pfile != NULL ){//se trovo il file lo leggo
+    if (pointFile != NULL ){//se trovo il file lo leggo
     	
     	printf("\nRicerca file...");
 
-        while ( !feof(pfile) ){//lo leggo finche non fisnisce il file
+        while ( !feof(pointFile) ){//lo leggo finche non finisce il file
         	
-        	fgets( prod[n].name, r, pfile );
+        	fgets(prod[n].name, r, pointFile );
         	fflush(stdin);
         	strlwr( prod[n].name );//imposta la stringa in minuscolo
-        	fgets( prod[n].des, r, pfile );
+        	fgets(prod[n].des, r, pointFile );
         	fflush(stdin);
         	strlwr( prod[n].des );
-        	fgets( prod[n].val, r, pfile );
+        	fgets(prod[n].val, r, pointFile );
         	fflush(stdin);
         	strlwr( prod[n].val );
-        	fscanf( pfile, " %c", &prod[n].cat );
+        	fscanf(pointFile, " %c", &prod[n].cat );
         	fflush(stdin);
         	
         	if ( prod[n].cat == 'v' ){
         		
-        		fscanf( pfile, " %c", &prod[n].com );
+        		fscanf(pointFile, " %c", &prod[n].com );
 			}
-			fscanf( pfile, "%f", &prod[n].price );
+			fscanf(pointFile, "%f", &prod[n].price );
 			fflush(stdin);
-			fscanf( pfile, "%d\n", &prod[n].copy );
+			fscanf(pointFile, "%d\n", &prod[n].copy );
 			fflush(stdin);
 			n++;
         }
         
-        fclose( pfile );
+        fclose(pointFile );
         
         return 0;
 
@@ -112,7 +98,7 @@ int load ( Pr prod[] ){
 
 
 //ricerca un prodotto voluto dall'utente
-int barraRicerca ( Pr product[] , int arr[], Carrello carr[], int h ){
+int barraRicerca (Product product[] , int arr[], Carrello carr[], int h ){
 	
 	int i, num = 0, t = 0;
 	
@@ -167,14 +153,14 @@ int barraRicerca ( Pr product[] , int arr[], Carrello carr[], int h ){
 		}
 	}
 	
-	printf("\n\n%d - prodotti trovatti", num);
+	printf("\n\n%d - prodotti trovati", num);
 	
 	return num;
 }
 
 
-//simula l'aquisto di un prodotto
-void acquista ( Pr product[], Carrello carr[], Pr prod[], int *credit, int h ){
+//simula l'acquisto di un prodotto
+void acquista (Product product[], Carrello carr[], Product prod[], int *credit, int h ){
 	
     int in, nc, num, i = 0, j;
     
@@ -196,7 +182,7 @@ void acquista ( Pr product[], Carrello carr[], Pr prod[], int *credit, int h ){
 	        
 	        // Aggiungi questa verifica per assicurarti che l'indice selezionato sia valido
 	            
-	        if ( product[in].cat != ' ' ) {//controloo che ci sia un prodotto
+	        if ( product[in].cat != ' ' ) {// controllo che ci sia un prodotto
 	        	
 	            printf("\nQuante copie desidera: ");
 	            scanf("%d", &nc);
@@ -208,7 +194,7 @@ void acquista ( Pr product[], Carrello carr[], Pr prod[], int *credit, int h ){
 	            	
 	            	*credit = *credit - v;//decrementa il credito
 	            
-		            if ( product[in].copy >= nc ) {//se il numero richiesto di copie supera la disponibilita stampo errore
+		            if ( product[in].copy >= nc ) {//se il numero richiesto di copie supera la disponibilità stampo errore
 		            	
 		            	product[in].copy -= nc;
 		                
@@ -222,9 +208,9 @@ void acquista ( Pr product[], Carrello carr[], Pr prod[], int *credit, int h ){
 		                    }
 		                }
 		                
-		                carr[i].prod = product[in];
-		                carr[i].prod.copy = 0;
-		                carr[i].prod.copy += nc;
+		                carr[i].product = product[in];
+		                carr[i].product.copy = 0;
+		                carr[i].product.copy += nc;
 		                
 		                n2++;
 			        }
@@ -252,7 +238,7 @@ void acquista ( Pr product[], Carrello carr[], Pr prod[], int *credit, int h ){
 
 
 //stampa tutto il catalogo del negozio
-void catalogo ( Pr prod[] ){
+void catalogo (Product prod[] ){
 	
 	int i, t = 0;
 	
@@ -271,7 +257,7 @@ void catalogo ( Pr prod[] ){
 
 
 //stampa i vari prodotti scelti dall'utente
-void prodotti ( Pr prod[], Carrello carr[], int *credit ){
+void prodotti (Product prod[], Carrello carr[], int *credit ){
 	
 	int i, t = 0, h = 0;
 	
@@ -280,7 +266,7 @@ void prodotti ( Pr prod[], Carrello carr[], int *credit ){
 	int v, num, bool = 0;
 	
 	//memorizza la categoria scelta e ne manipola il numero di copie
-	Pr product[r];
+	Product product[r];
 	
 	printf("\n1 - Videogiochi");
 	printf("\n2 - Action Figure");
@@ -368,13 +354,13 @@ void prodotti ( Pr prod[], Carrello carr[], int *credit ){
 
 
 //stampa esclusivamente i giochi voluti dall'utente
-void videogiochi ( Pr prod[], Carrello carr[], int *credit ){
+void videogiochi (Product prod[], Carrello carr[], int *credit ){
 	
 	char v;
 	
 	int i, t = 0, bool = 0, h = 0;
 	
-	Pr product[r];
+	Product product[r];
 	
 	printf("\n1 - PlayStation [ p ]");
 	printf("\n2 - Xbox [ x ]");
@@ -446,7 +432,7 @@ void videogiochi ( Pr prod[], Carrello carr[], int *credit ){
 			}
 			break;
 		}
-		case 'w':{//cerca e stampa i giochi windos
+		case 'w':{//cerca e stampa i giochi windows
 			
 			for(i = 0; i < n; i++){
 			
@@ -475,8 +461,8 @@ void videogiochi ( Pr prod[], Carrello carr[], int *credit ){
 } 
 
 
-//carrello cotente i prodotti
-void carre ( Pr prod[], Carrello carr[], int *credit ){
+//carrello contente i prodotti
+void carre (Product prod[], Carrello carr[], int *credit ){
 	
 	int i, t = 0;
 	
@@ -490,11 +476,11 @@ void carre ( Pr prod[], Carrello carr[], int *credit ){
 			
 			printf("\n\n");
 			printf("%d",t + 1);
-			printf("\n Nome: %s", carr[i].prod.name);
-			printf(" Descrizione: %s", carr[i].prod.des);
-			printf(" Valutazione: %s", carr[i].prod.val);
-			printf(" Prezzo: %0.2f", carr[i].prod.price);
-			printf("\n Copie disponibili: %d", carr[i].prod.copy);
+			printf("\n Nome: %s", carr[i].product.name);
+			printf(" Descrizione: %s", carr[i].product.des);
+			printf(" Valutazione: %s", carr[i].product.val);
+			printf(" Prezzo: %0.2f", carr[i].product.price);
+			printf("\n Copie disponibili: %d", carr[i].product.copy);
 			t++;
 		}
 	}
@@ -509,7 +495,7 @@ void menu (){
 
 	int s, h = 0;
     
-    Pr prod[r];//catalogo dei prodotti
+    Product prod[r];//catalogo dei prodotti
     
     int num = load ( prod );// carico il catalogo dal file
     
@@ -593,7 +579,7 @@ void menu (){
 }
 
 
-void acess (){
+void access (){
 	
 	
 	int s;
@@ -609,7 +595,7 @@ void acess (){
 
         case 1:{
 
-            
+
             break;
         }
         case 2:{
@@ -633,7 +619,6 @@ void acess (){
 
 int main (){
 	
-	
-    
+    menu();
     exit(0);
 }
