@@ -24,8 +24,8 @@ typedef struct {
 
 //
 typedef struct Payload{
-    int num;
-    Mondrian *value;
+    int number;
+    Mondrian *segment;
     struct Payload *left;
     struct Payload *right;
 }Tree;

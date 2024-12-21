@@ -1,23 +1,23 @@
 # ninja log v6
 3	102	7396454580941943	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-mkdir	77147bfc23593ddf
 3	102	7396454580941943	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-mkdir	77147bfc23593ddf
-13556	14819	7470310255460348	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-test	6ccc78d7be166253
+6185	6289	7558328725342835	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-test	6ccc78d7be166253
 103	9335	7396454673085327	raylib-populate-prefix/src/4.5.0.tar.gz	2c06ea19116af443
-5	8327	7470310191974924	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-download	2c06ea19116af443
-8328	8806	7470310198211470	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-update	3dc2bac63fa74d60
-5	8327	7470310191974924	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-download	2c06ea19116af443
+7	5646	7558328718934789	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-download	2067e0e102b92f24
+5647	5756	7558328720049583	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-update	3dc2bac63fa74d60
+7	5646	7558328718934789	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-download	2067e0e102b92f24
 103	9335	7396454673085327	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/4.5.0.tar.gz	2c06ea19116af443
-8328	8806	7470310198211470	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-update	3dc2bac63fa74d60
-8807	9899	7470310206550217	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-patch	6e6b0ee5579165d6
-8807	9899	7470310206550217	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-patch	6e6b0ee5579165d6
-9899	10590	7470310214818250	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-configure	d31a17434914b4ef
-9899	10590	7470310214818250	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-configure	d31a17434914b4ef
-10590	12289	7470310232405810	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-build	4d17183e8e3043c0
-10590	12289	7470310232405810	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-build	4d17183e8e3043c0
-12289	13556	7470310243305444	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-install	7df43c37c929012e
-12289	13556	7470310243305444	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-install	7df43c37c929012e
-13556	14819	7470310255460348	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-test	6ccc78d7be166253
-14819	17016	7470310276946965	CMakeFiles/raylib-populate-complete	cffb3c9b9cbcb22b
-14819	17016	7470310276946965	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-done	cffb3c9b9cbcb22b
-14819	17016	7470310276946965	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/CMakeFiles/raylib-populate-complete	cffb3c9b9cbcb22b
-14819	17016	7470310276946965	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-done	cffb3c9b9cbcb22b
+5647	5756	7558328720049583	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-update	3dc2bac63fa74d60
+5757	5875	7558328721223454	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-patch	6e6b0ee5579165d6
+5757	5875	7558328721223454	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-patch	6e6b0ee5579165d6
+5875	5975	7558328722218326	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-configure	d31a17434914b4ef
+5875	5975	7558328722218326	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-configure	d31a17434914b4ef
+5975	6080	7558328723261247	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-build	4d17183e8e3043c0
+5975	6080	7558328723261247	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-build	4d17183e8e3043c0
+6080	6184	7558328724307192	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-install	7df43c37c929012e
+6080	6184	7558328724307192	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-install	7df43c37c929012e
+6185	6289	7558328725342835	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-test	6ccc78d7be166253
+6289	6432	7558328726788763	CMakeFiles/raylib-populate-complete	cffb3c9b9cbcb22b
+6289	6432	7558328726788763	raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-done	cffb3c9b9cbcb22b
+6289	6432	7558328726788763	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/CMakeFiles/raylib-populate-complete	cffb3c9b9cbcb22b
+6289	6432	7558328726788763	C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/src/raylib-populate-stamp/raylib-populate-done	cffb3c9b9cbcb22b

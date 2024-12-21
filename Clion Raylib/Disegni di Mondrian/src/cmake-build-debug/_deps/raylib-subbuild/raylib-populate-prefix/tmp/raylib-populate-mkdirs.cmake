@@ -3,8 +3,13 @@
 
 cmake_minimum_required(VERSION 3.5)
 
+# If CMAKE_DISABLE_SOURCE_CHANGES is set to true and the source directory is an
+# existing directory in our source tree, calling file(MAKE_DIRECTORY) on it
+# would cause a fatal error, even though it would be a no-op.
+if(NOT EXISTS "C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-src")
+  file(MAKE_DIRECTORY "C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-src")
+endif()
 file(MAKE_DIRECTORY
-  "C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-src"
   "C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-build"
   "C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix"
   "C:/Users/makao/OneDrive/Desktop/Lav/esercitazioni/Lavori-c/Clion Raylib/Disegni di Mondrian/src/cmake-build-debug/_deps/raylib-subbuild/raylib-populate-prefix/tmp"

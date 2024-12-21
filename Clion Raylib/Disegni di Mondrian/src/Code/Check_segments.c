@@ -4,13 +4,14 @@
     * Luogo: Home
     * Data: 20/03/2024
     * Descrizione:
-        - controlla i segmenti del quadro
+        - verifica i segmenti del quadro
 */
 
-//
+#include "Geometry.h"
+
 int checkSeg( Mondrian *segments ){
     int check;
-    Tree *mov;
+    Tree *root;
     //
     return check;
 }
