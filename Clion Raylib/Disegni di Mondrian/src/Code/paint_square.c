@@ -21,3 +21,7 @@ void draw( int lSquare, struct Dot cent, Texture2D texture ){
     DrawText( "Quadro di Piet Mondrian:",  cent.x / 2, cent.y - lSquare, ( cent.y * 2 ) / 13, VIOLET);
     squarePaint( lSquare, cent, texture );
 }
+
+void horizontalSegment(int lSquare, struct Dot cent){}
+
+void verticalSegment(int lSquare, struct Dot cent){}

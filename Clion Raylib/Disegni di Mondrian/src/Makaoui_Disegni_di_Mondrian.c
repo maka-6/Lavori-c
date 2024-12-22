@@ -18,39 +18,47 @@ FILE* sizeSegment( Mondrian *paint ){
     if( pointFile != NULL ){
 
         // controllo che il file abbia contenuto
-        if ( feof(pointFile) != EOF ) {
-            // controllo che i dati presi siano 2
-            if ( fscanf(pointFile, "%d %d", &paint->nSeg, &paint->lSquare ) != 2 )
-                return NULL;
+        if (fscanf(pointFile, "%d %d", &paint->nSeg, &paint->lSquare) != 2) {
+            fclose(pointFile); // Chiudi il file in caso di errore
+            return NULL;
         }
         return pointFile;
     }
-    printf("\nOut of memory");
+    printf("\nImpossibile accedere al file");
     exit(5);
 }
 
 // carica i dati nel file in due segmenti
 int LoadData(Mondrian *paint, FILE *pointFile ){
 
-    int i;
+    if ( pointFile == NULL )
+        return 0;
 
+    int i;
     for (i = 0; i < paint->nSeg; i++) {
         // Inserimento dei dati per ogni segmento dal file
         if (fscanf(pointFile, "%d %d %d %d", &paint->A[i].x, &paint->A[i].y, &paint->B[i].x, &paint->B[i].y ) != 4 )
             return 0;
     }
-
     for (i = 0; i < paint->nSeg; ++i) {
-
-        if ((paint->A[i].x > paint->lSquare || paint->A[i].x < 0 ) || (paint->A[i].y > paint->lSquare || paint->A[i].y < 0 )){
-
-            if ((paint->B[i].x > paint->lSquare || paint->B[i].x < 0 ) || (paint->B[i].y > paint->lSquare || paint->B[i].y < 0 )){
-                return 1;
-            }
-            return 1;
+        //
+        if ((paint->A[i].x < 0 || paint->A[i].x > paint->lSquare ||
+             paint->A[i].y < 0 || paint->A[i].y > paint->lSquare) ||
+            (paint->B[i].x < 0 || paint->B[i].x > paint->lSquare ||
+             paint->B[i].y < 0 || paint->B[i].y > paint->lSquare)) {
+            return 0; // Dati non validi
         }
     }
-    return 0;
+    return 1;
+}
+
+void cleanup(Mondrian* paint, FILE* file) {
+    if (paint) {
+        free(paint->A);
+        free(paint->B);
+        free(paint);
+    }
+    if (file) fclose(file);
 }
 
 int main(){
@@ -76,70 +84,69 @@ int main(){
         return 0;
     }
     // controllo che i valori siano validi
-    if (paint->nSeg > 1 && paint->lSquare > 1 ){
-
-        // alloco memoria
-        paint->A = (struct Dot*) malloc(paint->nSeg * sizeof(struct Dot));
-        paint->B = (struct Dot*) malloc(paint->nSeg * sizeof(struct Dot));
-
-        // controllo se l'allocazione è avvenuta correttamente
-        if (paint->A == NULL || paint->B == NULL ){
-            printf("\nOut of memory");
-            // chiudo il file
-            fclose(pointFile );
-            return 5;
-        }
-
-        // controllo che il quadro è autentico
-        if ( LoadData(paint, pointFile) + checkSeg(paint ) == 0 ){
-            // esco se i dati sono illeggibili o errati
-            printf("\nERRORE, File illeggibile o Dati non Validi");
-            printf("\n------------------------------------------\n"
-                          "            Riavviare e riprovare\n");
-
-            // Libera la memoria allocata per i segmenti
-            free(paint->A);
-            free(paint->B);
-            // chiudo il file
-            fclose(pointFile );
-            return 0;
-        }
-
-        // buon fine
-        printf("\nLettura avvenuta correttamente\n");
-
-        int screenWidth, screenHeight;
-        // inizializzo la finestra
-        InitWindow(GetScreenWidth(), GetScreenHeight(), "Mostra su Mondrian");
-        screenWidth = GetScreenWidth();
-        screenHeight = GetScreenHeight();
-
-        struct Dot cent = center( screenHeight, screenWidth );
-
-        // imposto un target di fps
-        SetTargetFPS(114);
-
-        Texture2D texture = LoadTexture("texture/paint_background.png");
-
-        while (!WindowShouldClose()){
-            BeginDrawing();
-            draw((paint->lSquare + 18) * 10, cent, texture );
-            EndDrawing();
-        }
-        // chiudo la finestra
-        CloseWindow();
-        // Libera la memoria allocata per i segmenti
-        free(paint->A);
-        free(paint->B);
-
-    } else {
+    if (!pointFile || paint->nSeg <= 1 || paint->lSquare <= 1) {
         // esco se i dati sono errati
         printf("\nERRORE, Dati non Validi");
         printf("\n------------------------\n"
-               "Riavviare e riprovare");
+               "Riprovare piu tardi");
+        cleanup(paint, pointFile);
+        return 0;
     }
+
+    // alloco memoria
+    paint->A = (struct Dot*) malloc(paint->nSeg * sizeof(struct Dot));
+    paint->B = (struct Dot*) malloc(paint->nSeg * sizeof(struct Dot));
+
+    // controllo se l'allocazione è avvenuta correttamente
+    if (paint->A == NULL || paint->B == NULL ){
+        printf("\nOut of memory");
+        // chiudo il file
+        fclose(pointFile );
+        return 5;
+    }
+
+    // controllo che il quadro è autentico
+    if (!LoadData(paint, pointFile) || checkSeg(paint) != 1) {
+        // esco se i dati sono illeggibili o errati
+        printf("\nERRORE, File illeggibile o Dati non Validi");
+        printf("\n------------------------------------------\n"
+                      "            Riprovare piu tardi\n");
+
+        // Libera la memoria allocata per i segmenti
+        free(paint->A);
+        free(paint->B);
+        // chiudo il file
+        fclose(pointFile );
+        return 0;
+    }
+
+    // buon fine
+    printf("\nLettura avvenuta correttamente\n");
+
+    int screenWidth, screenHeight;
+    // inizializzo la finestra
+    InitWindow(GetScreenWidth(), GetScreenHeight(), "Mostra su Mondrian");
+    screenWidth = GetScreenWidth();
+    screenHeight = GetScreenHeight();
+
+    struct Dot cent = center( screenHeight, screenWidth );
+
+    // imposto un target di fps
+    SetTargetFPS(90);
+
+    Texture2D texture = LoadTexture("texture/paint_background.png");
+
+    while (!WindowShouldClose()){
+        BeginDrawing();
+        draw((paint->lSquare + 18) * 10, cent, texture );
+        EndDrawing();
+    }
+    // chiudo la finestra
+    CloseWindow();
+    // pulisco
+    UnloadTexture(texture);
     // chiudo il file
-    fclose(pointFile );
-    free(paint);
+    cleanup(paint, pointFile);
+
     return 0;
 }

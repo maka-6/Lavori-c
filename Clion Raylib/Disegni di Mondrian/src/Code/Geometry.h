@@ -14,6 +14,11 @@ struct Dot{
     int y;
 };
 
+typedef struct {
+    struct Dot A;
+    struct Dot B;
+}Segment;
+
 //
 typedef struct {
     int nSeg;
