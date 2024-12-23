@@ -23,7 +23,7 @@ typedef struct {
 MondrianSegments separateSegments(Mondrian *segments);
 
 // Prototipo della funzione per trovare o costruire un segmento principale
-Segment MainSegmentBuild(SegmentList segmentList, int segmentLength, int isHorizontal);
+Segment MainSegmentBuild(SegmentList segmentList, int squareSide, int isHorizontal);
 
 int checkSeg( Mondrian *segments ){
 
@@ -127,7 +127,6 @@ Segment MainSegmentBuild(SegmentList segmentList, int squareSide, int isHorizont
             return mainSegment;
         }
     }
-
     printf("\nQuadro fasullo");
     exit(1); // Termina con errore
 }
