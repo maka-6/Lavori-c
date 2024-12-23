@@ -127,6 +127,7 @@ Segment MainSegmentBuild(SegmentList segmentList, int squareSide, int isHorizont
             return mainSegment;
         }
     }
+
     printf("\nQuadro fasullo");
     exit(1); // Termina con errore
 }
