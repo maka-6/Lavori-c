@@ -31,22 +31,6 @@ int checkSeg( Mondrian *segments ){
     Segment mainHorizontal;
     Segment mainVertical;
     //Tree *root;
-    //
-    int i;
-    for (i = 0; i < separate.horizontal.count; ++i) {
-        if (distance(separate.horizontal.start[i],separate.horizontal.end[i])==segments->lSquare){
-            mainHorizontal.A = separate.horizontal.start[i];
-            mainHorizontal.B = separate.horizontal.end[i];
-            break;
-        }
-    }
-    for (i = 0; i < separate.vertical.count; ++i) {
-        if (distance(separate.vertical.start[i],separate.vertical.end[i])==segments->lSquare){
-            mainVertical.A = separate.vertical.start[i];
-            mainVertical.B = separate.vertical.end[i];
-            break;
-        }
-    }
 
     // Trova o costruisci il segmento orizzontale principale
     mainHorizontal = MainSegmentBuild(separate.horizontal, segments->lSquare, 1);
@@ -66,10 +50,10 @@ MondrianSegments separateSegments(Mondrian *segments){
     MondrianSegments separate = {0}; // Inizializza tutti i puntatori a NULL
     separate.vertical.count = 0;
     separate.horizontal.count = 0;
-    separate.horizontal.start = (struct Dot*) malloc(segments->nSeg / 2 * sizeof(struct Dot));
-    separate.horizontal.end = (struct Dot*) malloc(segments->nSeg / 2 * sizeof(struct Dot));
-    separate.vertical.start = (struct Dot*) malloc(segments->nSeg / 2 * sizeof(struct Dot));
-    separate.vertical.end = (struct Dot*) malloc(segments->nSeg / 2 * sizeof(struct Dot));
+    separate.horizontal.start = (struct Dot*) malloc((segments->nSeg / 2 + 1) * sizeof(struct Dot));
+    separate.horizontal.end = (struct Dot*) malloc((segments->nSeg / 2 + 1) * sizeof(struct Dot));
+    separate.vertical.start = (struct Dot*) malloc((segments->nSeg / 2 + 1) * sizeof(struct Dot));
+    separate.vertical.end = (struct Dot*) malloc((segments->nSeg / 2 + 1) * sizeof(struct Dot));
 
     // Controlla allocazioni
     if (!separate.horizontal.start || !separate.horizontal.end ||
@@ -100,10 +84,49 @@ MondrianSegments separateSegments(Mondrian *segments){
 }
 
 // Prototipo della funzione per trovare o costruire un segmento principale
-Segment MainSegmentBuild(SegmentList segmentList, int segmentLength, int isHorizontal){
+Segment MainSegmentBuild(SegmentList segmentList, int squareSide, int isHorizontal){
     Segment mainSegment = {0};
+    int i, j;
 
+    // Cerca il segmento principale
+    for (i = 0; i < segmentList.count; ++i) {
+        if (distance(segmentList.start[i], segmentList.end[i]) == squareSide) {
+            mainSegment.A = segmentList.start[i];
+            mainSegment.B = segmentList.end[i];
+            return mainSegment; // Segmento trovato
+        }
+    }
 
+    struct Dot start;
+    struct Dot end;
+    // Altrimenti costruisci il segmento principale
+    for (i = 0; i < segmentList.count; ++i) {
+        start = segmentList.start[i];
+        end = segmentList.end[i];
 
-    return mainSegment;
+        // Confronta con gli altri segmenti
+        for (j = 0; j < segmentList.count; ++j) {
+            if (i != j) {
+                // Controlla contiguità (orizzontale o verticale)
+                if (isHorizontal && end.x == segmentList.start[j].x && end.y == segmentList.start[j].y) {
+                    end = segmentList.end[j];
+                    j = -1; // Ricomincia il ciclo per verificare nuove estensioni
+                } else if (!isHorizontal && end.y == segmentList.start[j].y && end.x == segmentList.start[j].x) {
+                    end = segmentList.end[j];
+                    j = -1; // Ricomincia il ciclo per verificare nuove estensioni
+                }
+            }
+        }
+
+        // Verifica se il segmento costruito è valido
+        if (distance(start, end) == squareSide) {
+            mainSegment.A = start;
+            mainSegment.B = end;
+            printf("\n x%d y%d",mainSegment.A.x, mainSegment.A.y);
+            printf("\n x%d y%d",mainSegment.B.x, mainSegment.B.y);
+            return mainSegment;
+        }
+    }
+    printf("\nQuadro fasullo");
+    exit(1); // Termina con errore
 }
