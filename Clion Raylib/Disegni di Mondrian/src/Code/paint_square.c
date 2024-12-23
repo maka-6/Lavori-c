@@ -8,20 +8,37 @@
 */
 
 // disegna le forme all'interno del quadro
-void squarePaint( int lSquare, struct Dot cent, Texture2D texture ){
+void squarePaint( Mondrian *paint, struct Dot cent, Texture2D texture ){
+    int lSquare = 280;
     DrawTexture( texture, cent.x - (lSquare / 2) - 25, cent.y - 25, WHITE );
-    DrawRectangle( cent.x  - (lSquare/2), cent.y, lSquare, lSquare, VIOLET );
-    DrawRectangle( cent.x, cent.y, lSquare/2, lSquare, BLUE );
-    DrawRectangle( cent.x - lSquare/2, cent.y + lSquare/2, lSquare, lSquare/2, RED );
+    //DrawRectangle( cent.x  - (lSquare/2), cent.y, lSquare, lSquare, VIOLET );
+    //DrawRectangle( cent.x, cent.y, lSquare/2, lSquare, BLUE );
+    //DrawRectangle( cent.x - lSquare/2, cent.y + lSquare/2, lSquare, lSquare/2, RED );
+
+    float scaleX = (float)lSquare / paint->lSquare;
+    float scaleY = (float)lSquare / paint->lSquare;
+
+    int offsetX = cent.x - lSquare / 2;
+    int offsetY = cent.y;
+
+    for (int i = 0; i < paint->nSeg; i++) {
+        int startX = (int)(offsetX + paint->A[i].x * scaleX);
+        int startY = (int)(offsetY + paint->A[i].y * scaleY);
+        int endX = (int)(offsetX + paint->B[i].x * scaleX);
+        int endY = (int)(offsetY + paint->B[i].y * scaleY);
+
+        // Disegna il segmento
+        DrawLine(startX , startY, endX, endY, RAYWHITE);
+    }
 }
 
 // renderizza il quadro
-void draw( int lSquare, struct Dot cent, Texture2D texture ){
+void draw( Mondrian *paint, struct Dot cent, Texture2D texture ){
     ClearBackground(LIGHTGRAY);
-    DrawText( "Quadro di Piet Mondrian:",  cent.x / 2, cent.y - lSquare, ( cent.y * 2 ) / 13, VIOLET);
-    squarePaint( lSquare, cent, texture );
+    DrawText( "Quadro di Piet Mondrian:",  cent.x / 2, cent.y - 280, ( cent.y * 2 ) / 13, VIOLET);
+    squarePaint( paint, cent, texture );
 }
 
-void horizontalSegment(int lSquare, struct Dot cent){}
+//void horizontalDraw(int lSquare, struct Dot cent){}
 
-void verticalSegment(int lSquare, struct Dot cent){}
+//void verticalDraw(int lSquare, struct Dot cent){}

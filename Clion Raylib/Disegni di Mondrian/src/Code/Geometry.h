@@ -35,13 +35,16 @@ typedef struct Payload{
     struct Payload *right;
 }Tree;
 
-// distanza tra due punti
-int distance( struct Dot a, struct Dot b ){
-    double tmp;
-    tmp=pow(a.x-b.x,2);
-    tmp+=pow(a.y-b.y,2);
-    return (int)sqrt(tmp);
-}
+typedef struct {
+    struct Dot *start; // Array di punti iniziali
+    struct Dot *end;   // Array di punti finali
+    int count;         // Numero di segmenti
+} SegmentList;
+
+typedef struct {
+    SegmentList horizontal; // Lista di segmenti orizzontali
+    SegmentList vertical;   // Lista di segmenti verticali
+} MondrianSegments;
 
 // centro dello schermo
 struct Dot center( int screenHeight, int screenWidth ){
@@ -49,6 +52,14 @@ struct Dot center( int screenHeight, int screenWidth ){
     cent.x = screenWidth / 2;
     cent.y = screenHeight / 2;
     return cent;
+}
+
+// distanza tra due punti
+int distance( struct Dot a, struct Dot b ){
+    double tmp;
+    tmp=pow(a.x-b.x,2);
+    tmp+=pow(a.y-b.y,2);
+    return (int)sqrt(tmp);
 }
 
 #endif //MAKAOUI_DISEGNI_DI_MONDRIAN_C_GEOMETRY_H

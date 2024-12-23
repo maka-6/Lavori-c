@@ -9,42 +9,7 @@
 
 #include "Geometry.h"
 
-typedef struct {
-    struct Dot *start; // Array di punti iniziali
-    struct Dot *end;   // Array di punti finali
-    int count;         // Numero di segmenti
-} SegmentList;
-
-typedef struct {
-    SegmentList horizontal; // Lista di segmenti orizzontali
-    SegmentList vertical;   // Lista di segmenti verticali
-} MondrianSegments;
-
-MondrianSegments separateSegments(Mondrian *segments);
-
-// Prototipo della funzione per trovare o costruire un segmento principale
-Segment MainSegmentBuild(SegmentList segmentList, int squareSide, int isHorizontal);
-
-int checkSeg( Mondrian *segments ){
-
-    MondrianSegments separate = separateSegments(segments);
-    Segment mainHorizontal;
-    Segment mainVertical;
-    //Tree *root;
-
-    // Trova o costruisci il segmento orizzontale principale
-    mainHorizontal = MainSegmentBuild(separate.horizontal, segments->lSquare, 1);
-
-    // Trova o costruisci il segmento verticale principale
-    mainVertical = MainSegmentBuild(separate.vertical, segments->lSquare, 0);
-
-    // Libera la memoria allocata
-    free(separate.vertical.start);
-    free(separate.vertical.end);
-    free(separate.horizontal.start);
-    free(separate.horizontal.end);
-    return 1;
-}
+//void freeTree(Tree *root);
 
 MondrianSegments separateSegments(Mondrian *segments){
     MondrianSegments separate = {0}; // Inizializza tutti i puntatori a NULL
@@ -84,22 +49,30 @@ MondrianSegments separateSegments(Mondrian *segments){
 }
 
 // Prototipo della funzione per trovare o costruire un segmento principale
-Segment MainSegmentBuild(SegmentList segmentList, int squareSide, int isHorizontal){
+Segment MainSegmentBuild(SegmentList segmentList, int squareSide, int isHorizontal ){
     Segment mainSegment = {0};
     int i, j;
+    // Array per tracciare i segmenti usati
+    bool *used = malloc(segmentList.count * sizeof(bool));
 
-    // Cerca il segmento principale
+    for (i = 0; i < segmentList.count; ++i) {
+        used[i] = false;
+    }
+
+    // Cerca il segmento principale se gia presente intero
     for (i = 0; i < segmentList.count; ++i) {
         if (distance(segmentList.start[i], segmentList.end[i]) == squareSide) {
             mainSegment.A = segmentList.start[i];
             mainSegment.B = segmentList.end[i];
+            used[i] = true;
+            free(used);
             return mainSegment; // Segmento trovato
         }
     }
 
     struct Dot start;
     struct Dot end;
-    // Altrimenti costruisci il segmento principale
+    // Altrimenti costruisci il segmento principale con i segmenti piccoli
     for (i = 0; i < segmentList.count; ++i) {
         start = segmentList.start[i];
         end = segmentList.end[i];
@@ -111,7 +84,7 @@ Segment MainSegmentBuild(SegmentList segmentList, int squareSide, int isHorizont
                 if (isHorizontal && end.x == segmentList.start[j].x && end.y == segmentList.start[j].y) {
                     end = segmentList.end[j];
                     j = -1; // Ricomincia il ciclo per verificare nuove estensioni
-                } else if (!isHorizontal && end.y == segmentList.start[j].y && end.x == segmentList.start[j].x) {
+                } else if (end.y == segmentList.start[j].y && end.x == segmentList.start[j].x) {
                     end = segmentList.end[j];
                     j = -1; // Ricomincia il ciclo per verificare nuove estensioni
                 }
@@ -122,11 +95,38 @@ Segment MainSegmentBuild(SegmentList segmentList, int squareSide, int isHorizont
         if (distance(start, end) == squareSide) {
             mainSegment.A = start;
             mainSegment.B = end;
+            //debug
             printf("\n x%d y%d",mainSegment.A.x, mainSegment.A.y);
             printf("\n x%d y%d",mainSegment.B.x, mainSegment.B.y);
+            free(used);
             return mainSegment;
         }
     }
+    free(used);
     printf("\nQuadro fasullo");
     exit(1); // Termina con errore
+}
+
+int checkSeg( Mondrian *segments ){
+
+    MondrianSegments separate = separateSegments(segments);
+    Segment mainHorizontal;
+    Segment mainVertical;
+    //Tree *root;
+
+    // Trova o costruisci il segmento orizzontale principale
+    mainHorizontal = MainSegmentBuild(separate.horizontal, segments->lSquare, 1);
+    // Trova o costruisci il segmento verticale principale
+    mainVertical = MainSegmentBuild(separate.vertical, segments->lSquare, 0);
+
+    // costruisco l'albero
+    //root = (Tree*) malloc(sizeof(Tree));
+
+    // Libera la memoria allocata
+    //freeTree(root);
+    free(separate.vertical.start);
+    free(separate.vertical.end);
+    free(separate.horizontal.start);
+    free(separate.horizontal.end);
+    return 1;
 }

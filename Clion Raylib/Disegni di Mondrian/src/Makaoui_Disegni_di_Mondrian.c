@@ -14,7 +14,7 @@
 // legge la prima riga del file per il lato del quadrato e numero segmenti
 FILE* sizeSegment( Mondrian *paint ){
 
-    FILE* pointFile = fopen("Data/disegno.txt", "r" );
+    FILE* pointFile = fopen("Data/disegno.input.txt", "r" );
     if( pointFile != NULL ){
 
         // controllo che il file abbia contenuto
@@ -29,7 +29,7 @@ FILE* sizeSegment( Mondrian *paint ){
 }
 
 // carica i dati nel file in due segmenti
-int LoadData(Mondrian *paint, FILE *pointFile ){
+int inputFile(Mondrian *paint, FILE *pointFile ){
 
     if ( pointFile == NULL )
         return 0;
@@ -52,6 +52,19 @@ int LoadData(Mondrian *paint, FILE *pointFile ){
     return 1;
 }
 
+// carica i dati nel file in due segmenti
+int outputFile(Mondrian *paint){
+
+    FILE *pointFile = fopen("Data/disegno.output.txt","w");
+    if ( pointFile == NULL )
+        return 0;
+
+    int i;
+    for (i = 0; i < paint->nSeg; ++i) {
+    }
+    return 1;
+}
+
 void cleanup(Mondrian* paint, FILE* file) {
     if (paint) {
         free(paint->A);
@@ -66,7 +79,7 @@ int main(){
     printf("\n                [ !!ATTENZIONE!! ]"
                   "\n[ il File di testo deve rispettare un preciso formato ]");
     printf("\n-------------------------------------------------------\n"
-                  "         [ cercare esempio.txt in ./src/Data ]\n");
+                  "         [ cercare esempio.input.txt in ./src/Data ]\n");
 
     //
     Mondrian *paint;
@@ -106,7 +119,7 @@ int main(){
     }
 
     // controllo che il quadro è autentico
-    if (!LoadData(paint, pointFile) || checkSeg(paint) != 1) {
+    if (!inputFile(paint, pointFile) || checkSeg(paint) != 1) {
         // esco se i dati sono illeggibili o errati
         printf("\nERRORE, File illeggibile o Dati non Validi");
         printf("\n------------------------------------------\n"
@@ -136,9 +149,11 @@ int main(){
 
     Texture2D texture = LoadTexture("texture/paint_background.png");
 
+    outputFile( paint );
+
     while (!WindowShouldClose()){
         BeginDrawing();
-        draw((paint->lSquare + 18) * 10, cent, texture );
+        draw( paint, cent, texture );
         EndDrawing();
     }
     // chiudo la finestra
