@@ -9,16 +9,15 @@
 
 // disegna le forme all'interno del quadro
 void squarePaint( Mondrian *paint, struct Dot cent, Texture2D texture ){
-    int lSquare = 280;
-    DrawTexture( texture, cent.x - (lSquare / 2) - 25, cent.y - 25, WHITE );
+    DrawTexture( texture, cent.x - (280 / 2) - 25, cent.y - 25, WHITE );
     //DrawRectangle( cent.x  - (lSquare/2), cent.y, lSquare, lSquare, VIOLET );
     //DrawRectangle( cent.x, cent.y, lSquare/2, lSquare, BLUE );
     //DrawRectangle( cent.x - lSquare/2, cent.y + lSquare/2, lSquare, lSquare/2, RED );
 
-    float scaleX = (float)lSquare / paint->lSquare;
-    float scaleY = (float)lSquare / paint->lSquare;
+    float scaleX = (float)280 / paint->lSquare;
+    float scaleY = (float)280 / paint->lSquare;
 
-    int offsetX = cent.x - lSquare / 2;
+    int offsetX = cent.x - 280 / 2;
     int offsetY = cent.y;
 
     for (int i = 0; i < paint->nSeg; i++) {
